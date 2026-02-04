@@ -17,6 +17,7 @@ import {
   Pie,
   Cell,
 } from 'recharts';
+import type { PieLabelRenderProps } from 'recharts';
 import { HiArrowUp, HiArrowDown, HiCash } from 'react-icons/hi';
 
 const COLORS = [
@@ -164,7 +165,7 @@ export default function DashboardPage() {
               <XAxis dataKey="name" />
               <YAxis />
               <Tooltip
-                formatter={(value: number | undefined) => formatCurrency(value ?? 0)}
+                formatter={(value) => formatCurrency(Number(value ?? 0))}
               />
               <Legend />
               <Bar
@@ -197,8 +198,8 @@ export default function DashboardPage() {
                   cy="50%"
                   outerRadius={100}
                   dataKey="value"
-                  label={({ name, percent }: { name: string; percent?: number }) =>
-                    `${name} ${((percent ?? 0) * 100).toFixed(0)}%`
+                  label={({ name, percent }: PieLabelRenderProps) =>
+                    `${name ?? ''} ${(((percent as number) ?? 0) * 100).toFixed(0)}%`
                   }
                 >
                   {pieData.map((entry, index) => (
@@ -209,7 +210,7 @@ export default function DashboardPage() {
                   ))}
                 </Pie>
                 <Tooltip
-                  formatter={(value: number | undefined) => formatCurrency(value ?? 0)}
+                  formatter={(value) => formatCurrency(Number(value ?? 0))}
                 />
               </PieChart>
             </ResponsiveContainer>

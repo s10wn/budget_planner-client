@@ -17,6 +17,7 @@ import {
   LineChart,
   Line,
 } from 'recharts';
+import type { PieLabelRenderProps } from 'recharts';
 import { HiDocumentDownload } from 'react-icons/hi';
 
 const MONTHS = [
@@ -216,7 +217,7 @@ export default function ReportsPage() {
               <XAxis dataKey="name" />
               <YAxis />
               <Tooltip
-                formatter={(value: number | undefined) => formatCurrency(value ?? 0)}
+                formatter={(value) => formatCurrency(Number(value ?? 0))}
               />
               <Bar dataKey="value" radius={[4, 4, 0, 0]}>
                 {barData.map((entry, index) => (
@@ -241,8 +242,8 @@ export default function ReportsPage() {
                   cy="50%"
                   outerRadius={100}
                   dataKey="value"
-                  label={({ name, percent }: { name: string; percent?: number }) =>
-                    `${name} ${((percent ?? 0) * 100).toFixed(0)}%`
+                  label={({ name, percent }: PieLabelRenderProps) =>
+                    `${name ?? ''} ${(((percent as number) ?? 0) * 100).toFixed(0)}%`
                   }
                 >
                   {pieData.map((entry, index) => (
@@ -253,7 +254,7 @@ export default function ReportsPage() {
                   ))}
                 </Pie>
                 <Tooltip
-                  formatter={(value: number | undefined) => formatCurrency(value ?? 0)}
+                  formatter={(value) => formatCurrency(Number(value ?? 0))}
                 />
               </PieChart>
             </ResponsiveContainer>
@@ -276,7 +277,7 @@ export default function ReportsPage() {
             <XAxis dataKey="name" />
             <YAxis />
             <Tooltip
-              formatter={(value: number | undefined) => formatCurrency(value ?? 0)}
+              formatter={(value) => formatCurrency(Number(value ?? 0))}
             />
             <Legend />
             <Line
