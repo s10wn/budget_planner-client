@@ -21,32 +21,24 @@ import type { PieLabelRenderProps } from 'recharts';
 import { HiDocumentDownload } from 'react-icons/hi';
 
 const MONTHS = [
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'May',
-  'Jun',
-  'Jul',
-  'Aug',
-  'Sep',
-  'Oct',
-  'Nov',
-  'Dec',
+  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
 ];
 
 const COLORS = [
-  '#EF4444',
-  '#F59E0B',
-  '#3B82F6',
-  '#10B981',
-  '#8B5CF6',
-  '#EC4899',
-  '#06B6D4',
-  '#D946EF',
-  '#FB923C',
-  '#64748B',
+  '#EF4444', '#F59E0B', '#3B82F6', '#10B981', '#8B5CF6',
+  '#EC4899', '#06B6D4', '#D946EF', '#FB923C', '#64748B',
 ];
+
+const chartTooltipStyle = {
+  contentStyle: {
+    backgroundColor: '#1e293b',
+    border: '1px solid #334155',
+    borderRadius: '8px',
+    color: '#f1f5f9',
+  },
+  labelStyle: { color: '#94a3b8' },
+};
 
 export default function ReportsPage() {
   const { t } = useTranslation();
@@ -131,7 +123,7 @@ export default function ReportsPage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <h1 className="text-2xl font-bold text-gray-900">
+        <h1 className="text-2xl font-bold text-slate-100">
           {t('reports.title')}
         </h1>
         <div className="flex gap-2">
@@ -182,21 +174,21 @@ export default function ReportsPage() {
       {monthlyReport && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="card text-center">
-            <p className="text-sm text-gray-500">{t('dashboard.income')}</p>
-            <p className="text-2xl font-bold text-green-600">
+            <p className="text-sm text-slate-400">{t('dashboard.income')}</p>
+            <p className="text-2xl font-bold text-emerald-400">
               +{formatCurrency(monthlyReport.totalIncome)}
             </p>
           </div>
           <div className="card text-center">
-            <p className="text-sm text-gray-500">{t('dashboard.expenses')}</p>
-            <p className="text-2xl font-bold text-red-600">
+            <p className="text-sm text-slate-400">{t('dashboard.expenses')}</p>
+            <p className="text-2xl font-bold text-red-400">
               -{formatCurrency(monthlyReport.totalExpense)}
             </p>
           </div>
           <div className="card text-center">
-            <p className="text-sm text-gray-500">{t('dashboard.balance')}</p>
+            <p className="text-sm text-slate-400">{t('dashboard.balance')}</p>
             <p
-              className={`text-2xl font-bold ${monthlyReport.balance >= 0 ? 'text-indigo-600' : 'text-red-600'}`}
+              className={`text-2xl font-bold ${monthlyReport.balance >= 0 ? 'text-violet-400' : 'text-red-400'}`}
             >
               {formatCurrency(monthlyReport.balance)}
             </p>
@@ -208,15 +200,16 @@ export default function ReportsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Monthly income vs expenses */}
         <div className="card">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">
+          <h2 className="text-lg font-semibold text-slate-100 mb-4">
             {t('reports.incomeVsExpenses')}
           </h2>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={barData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
+              <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+              <XAxis dataKey="name" stroke="#64748b" />
+              <YAxis stroke="#64748b" />
               <Tooltip
+                {...chartTooltipStyle}
                 formatter={(value) => formatCurrency(Number(value ?? 0))}
               />
               <Bar dataKey="value" radius={[4, 4, 0, 0]}>
@@ -230,7 +223,7 @@ export default function ReportsPage() {
 
         {/* Expenses by category pie */}
         <div className="card">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">
+          <h2 className="text-lg font-semibold text-slate-100 mb-4">
             {t('reports.expensesByCategory')}
           </h2>
           {pieData.length > 0 ? (
@@ -254,12 +247,13 @@ export default function ReportsPage() {
                   ))}
                 </Pie>
                 <Tooltip
+                  {...chartTooltipStyle}
                   formatter={(value) => formatCurrency(Number(value ?? 0))}
                 />
               </PieChart>
             </ResponsiveContainer>
           ) : (
-            <div className="flex items-center justify-center h-[300px] text-gray-400">
+            <div className="flex items-center justify-center h-[300px] text-slate-500">
               {t('common.noData')}
             </div>
           )}
@@ -268,18 +262,19 @@ export default function ReportsPage() {
 
       {/* Yearly trend */}
       <div className="card">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">
+        <h2 className="text-lg font-semibold text-slate-100 mb-4">
           {t('reports.yearlyTrend')} ({year})
         </h2>
         <ResponsiveContainer width="100%" height={350}>
           <LineChart data={lineData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
+            <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+            <XAxis dataKey="name" stroke="#64748b" />
+            <YAxis stroke="#64748b" />
             <Tooltip
+              {...chartTooltipStyle}
               formatter={(value) => formatCurrency(Number(value ?? 0))}
             />
-            <Legend />
+            <Legend wrapperStyle={{ color: '#94a3b8' }} />
             <Line
               type="monotone"
               dataKey="income"

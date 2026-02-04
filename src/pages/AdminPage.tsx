@@ -95,21 +95,21 @@ export default function AdminPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-        <HiShieldCheck className="w-7 h-7 text-indigo-600" />
+      <h1 className="text-2xl font-bold text-slate-100 flex items-center gap-2">
+        <HiShieldCheck className="w-7 h-7 text-amber-400" />
         {t('admin.title')}
       </h1>
 
       {/* Tabs */}
-      <div className="flex flex-wrap gap-2 border-b border-gray-200 pb-2">
+      <div className="flex flex-wrap gap-2 border-b border-slate-800 pb-2">
         {TAB_CONFIG.map((tabItem) => (
           <button
             key={tabItem.id}
             onClick={() => setTab(tabItem.id)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all cursor-pointer ${
               tab === tabItem.id
-                ? 'bg-indigo-600 text-white'
-                : 'text-gray-600 hover:bg-gray-100'
+                ? 'bg-amber-500 text-slate-950'
+                : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
             }`}
           >
             <tabItem.icon className="w-4 h-4" />
@@ -123,24 +123,24 @@ export default function AdminPage() {
         <div className="space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="card text-center">
-              <p className="text-3xl font-bold text-indigo-600">
+              <p className="text-3xl font-bold text-amber-400">
                 {stats.usersCount}
               </p>
-              <p className="text-sm text-gray-500">{t('admin.totalUsers')}</p>
+              <p className="text-sm text-slate-400">{t('admin.totalUsers')}</p>
             </div>
             <div className="card text-center">
-              <p className="text-3xl font-bold text-green-600">
+              <p className="text-3xl font-bold text-emerald-400">
                 {stats.transactionsCount}
               </p>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-slate-400">
                 {t('admin.totalTransactions')}
               </p>
             </div>
             <div className="card text-center">
-              <p className="text-3xl font-bold text-purple-600">
+              <p className="text-3xl font-bold text-violet-400">
                 {stats.activeApiKeys}
               </p>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-slate-400">
                 {t('admin.activeApiKeys')}
               </p>
             </div>
@@ -148,15 +148,15 @@ export default function AdminPage() {
 
           {stats.recentUsers?.length > 0 && (
             <div className="card">
-              <h3 className="font-semibold mb-3">Recent Users</h3>
+              <h3 className="font-semibold text-slate-100 mb-3">Recent Users</h3>
               <div className="space-y-2">
                 {stats.recentUsers.map((u) => (
                   <div
                     key={u.id}
-                    className="flex justify-between text-sm py-1 border-b border-gray-50"
+                    className="flex justify-between text-sm py-1 border-b border-slate-800/60"
                   >
-                    <span>{u.email}</span>
-                    <span className="text-gray-400">
+                    <span className="text-slate-300">{u.email}</span>
+                    <span className="text-slate-500">
                       {new Date(u.createdAt).toLocaleDateString()}
                     </span>
                   </div>
@@ -172,37 +172,37 @@ export default function AdminPage() {
         <div className="card overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-gray-100">
-                <th className="text-left py-3 px-2 text-sm font-medium text-gray-500">
+              <tr className="border-b border-slate-800">
+                <th className="text-left py-3 px-2 text-sm font-medium text-slate-400">
                   {t('auth.email')}
                 </th>
-                <th className="text-left py-3 px-2 text-sm font-medium text-gray-500 hidden sm:table-cell">
+                <th className="text-left py-3 px-2 text-sm font-medium text-slate-400 hidden sm:table-cell">
                   {t('auth.name')}
                 </th>
-                <th className="text-left py-3 px-2 text-sm font-medium text-gray-500">
+                <th className="text-left py-3 px-2 text-sm font-medium text-slate-400">
                   Role
                 </th>
-                <th className="text-left py-3 px-2 text-sm font-medium text-gray-500">
+                <th className="text-left py-3 px-2 text-sm font-medium text-slate-400">
                   Status
                 </th>
-                <th className="text-right py-3 px-2 text-sm font-medium text-gray-500">
+                <th className="text-right py-3 px-2 text-sm font-medium text-slate-400">
                   {t('common.actions')}
                 </th>
               </tr>
             </thead>
             <tbody>
               {usersData?.data?.map((u) => (
-                <tr key={u.id} className="border-b border-gray-50">
-                  <td className="py-3 px-2 text-sm">{u.email}</td>
-                  <td className="py-3 px-2 text-sm hidden sm:table-cell">
+                <tr key={u.id} className="border-b border-slate-800/60">
+                  <td className="py-3 px-2 text-sm text-slate-300">{u.email}</td>
+                  <td className="py-3 px-2 text-sm text-slate-400 hidden sm:table-cell">
                     {u.name}
                   </td>
                   <td className="py-3 px-2 text-sm">
                     <span
                       className={`px-2 py-1 rounded text-xs font-medium ${
                         u.role === 'ADMIN'
-                          ? 'bg-purple-100 text-purple-700'
-                          : 'bg-gray-100 text-gray-700'
+                          ? 'bg-violet-500/15 text-violet-400'
+                          : 'bg-slate-800 text-slate-400'
                       }`}
                     >
                       {u.role}
@@ -212,8 +212,8 @@ export default function AdminPage() {
                     <span
                       className={`px-2 py-1 rounded text-xs font-medium ${
                         u.isBlocked
-                          ? 'bg-red-100 text-red-700'
-                          : 'bg-green-100 text-green-700'
+                          ? 'bg-red-500/15 text-red-400'
+                          : 'bg-emerald-500/15 text-emerald-400'
                       }`}
                     >
                       {u.isBlocked ? 'Blocked' : 'Active'}
@@ -223,7 +223,7 @@ export default function AdminPage() {
                     {u.isBlocked ? (
                       <button
                         onClick={() => unblockMutation.mutate(u.id)}
-                        className="text-green-600 hover:text-green-800 mr-2"
+                        className="text-emerald-500 hover:text-emerald-400 mr-2 cursor-pointer transition-colors"
                         title={t('admin.unblock')}
                       >
                         <HiCheck className="w-4 h-4 inline" />
@@ -231,7 +231,7 @@ export default function AdminPage() {
                     ) : (
                       <button
                         onClick={() => blockMutation.mutate(u.id)}
-                        className="text-yellow-600 hover:text-yellow-800 mr-2"
+                        className="text-amber-500 hover:text-amber-400 mr-2 cursor-pointer transition-colors"
                         title={t('admin.block')}
                       >
                         <HiBan className="w-4 h-4 inline" />
@@ -242,7 +242,7 @@ export default function AdminPage() {
                         if (confirm(t('common.confirm')))
                           deleteUserMutation.mutate(u.id);
                       }}
-                      className="text-red-400 hover:text-red-600"
+                      className="text-slate-500 hover:text-red-400 cursor-pointer transition-colors"
                       title={t('common.delete')}
                     >
                       <HiTrash className="w-4 h-4 inline" />
@@ -262,8 +262,8 @@ export default function AdminPage() {
             <div key={cat.id} className="card flex items-center gap-3 !p-4">
               <span className="text-2xl">{cat.icon}</span>
               <div>
-                <p className="font-medium">{cat.name}</p>
-                <p className="text-xs text-gray-400">{cat.type}</p>
+                <p className="font-medium text-slate-200">{cat.name}</p>
+                <p className="text-xs text-slate-500">{cat.type}</p>
               </div>
               <div
                 className="w-4 h-4 rounded-full ml-auto shrink-0"
@@ -279,35 +279,35 @@ export default function AdminPage() {
         <div className="card overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-gray-100">
-                <th className="text-left py-3 px-2 text-sm font-medium text-gray-500">
+              <tr className="border-b border-slate-800">
+                <th className="text-left py-3 px-2 text-sm font-medium text-slate-400">
                   Code
                 </th>
-                <th className="text-left py-3 px-2 text-sm font-medium text-gray-500">
+                <th className="text-left py-3 px-2 text-sm font-medium text-slate-400">
                   Name
                 </th>
-                <th className="text-left py-3 px-2 text-sm font-medium text-gray-500">
+                <th className="text-left py-3 px-2 text-sm font-medium text-slate-400">
                   Symbol
                 </th>
-                <th className="text-left py-3 px-2 text-sm font-medium text-gray-500">
+                <th className="text-left py-3 px-2 text-sm font-medium text-slate-400">
                   Status
                 </th>
               </tr>
             </thead>
             <tbody>
               {currencies?.map((c) => (
-                <tr key={c.id} className="border-b border-gray-50">
-                  <td className="py-3 px-2 font-mono text-sm font-medium">
+                <tr key={c.id} className="border-b border-slate-800/60">
+                  <td className="py-3 px-2 font-mono text-sm font-medium text-slate-200">
                     {c.code}
                   </td>
-                  <td className="py-3 px-2 text-sm">{c.name}</td>
-                  <td className="py-3 px-2 text-lg">{c.symbol}</td>
+                  <td className="py-3 px-2 text-sm text-slate-300">{c.name}</td>
+                  <td className="py-3 px-2 text-lg text-slate-300">{c.symbol}</td>
                   <td className="py-3 px-2 text-sm">
                     <span
                       className={`px-2 py-1 rounded text-xs ${
                         c.isActive
-                          ? 'bg-green-100 text-green-700'
-                          : 'bg-gray-100 text-gray-500'
+                          ? 'bg-emerald-500/15 text-emerald-400'
+                          : 'bg-slate-800 text-slate-500'
                       }`}
                     >
                       {c.isActive ? 'Active' : 'Inactive'}

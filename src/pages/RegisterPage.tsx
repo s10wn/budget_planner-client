@@ -28,15 +28,15 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-slate-950 px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-indigo-600">BudgetPlanner</h1>
-          <p className="text-gray-500 mt-2">{t('auth.registerTitle')}</p>
+          <h1 className="text-3xl font-bold text-amber-400 tracking-tight">BudgetPlanner</h1>
+          <p className="text-slate-400 mt-2">{t('auth.registerTitle')}</p>
         </div>
-        <form onSubmit={handleSubmit} className="card space-y-4">
+        <form onSubmit={handleSubmit} className="card space-y-5">
           <div>
-            <label htmlFor="register-name" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="register-name" className="block text-sm font-medium text-slate-300 mb-1.5">
               {t('auth.name')}
             </label>
             <input
@@ -50,7 +50,7 @@ export default function RegisterPage() {
             />
           </div>
           <div>
-            <label htmlFor="register-email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="register-email" className="block text-sm font-medium text-slate-300 mb-1.5">
               {t('auth.email')}
             </label>
             <input
@@ -64,7 +64,7 @@ export default function RegisterPage() {
             />
           </div>
           <div>
-            <label htmlFor="register-password" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="register-password" className="block text-sm font-medium text-slate-300 mb-1.5">
               {t('auth.password')}
             </label>
             <input
@@ -81,9 +81,9 @@ export default function RegisterPage() {
           <button type="submit" disabled={loading} className="btn-primary w-full">
             {loading ? t('common.loading') : t('auth.register')}
           </button>
-          <p className="text-center text-sm text-gray-500">
+          <p className="text-center text-sm text-slate-400">
             {t('auth.hasAccount')}{' '}
-            <Link to="/login" className="text-indigo-600 hover:underline">
+            <Link to="/login" className="text-amber-400 hover:text-amber-300 transition-colors">
               {t('auth.login')}
             </Link>
           </p>

@@ -6,7 +6,7 @@ import { categoriesService } from '../services/categories.service';
 import type { Transaction, Category } from '../types';
 import { format } from 'date-fns';
 import toast from 'react-hot-toast';
-import { HiPlus, HiPencil, HiTrash, HiX } from 'react-icons/hi';
+import { HiPlus, HiPencil, HiTrash, HiX, HiChevronLeft, HiChevronRight } from 'react-icons/hi';
 
 export default function TransactionsPage() {
   const { t } = useTranslation();
@@ -129,7 +129,7 @@ export default function TransactionsPage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <h1 className="text-2xl font-bold text-gray-900">
+        <h1 className="text-2xl font-bold text-slate-100">
           {t('transactions.title')}
         </h1>
         <button
@@ -152,10 +152,10 @@ export default function TransactionsPage() {
               setTypeFilter(type);
               setPage(1);
             }}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all cursor-pointer ${
               typeFilter === type
-                ? 'bg-indigo-600 text-white'
-                : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
+                ? 'bg-amber-500 text-slate-950'
+                : 'bg-slate-800 text-slate-400 border border-slate-700 hover:bg-slate-700 hover:text-slate-200'
             }`}
           >
             {type === ''
@@ -171,7 +171,7 @@ export default function TransactionsPage() {
       {showForm && (
         <div className="card">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-semibold">
+            <h2 className="text-lg font-semibold text-slate-100">
               {editingTx
                 ? t('transactions.editTransaction')
                 : t('transactions.addNew')}
@@ -179,8 +179,9 @@ export default function TransactionsPage() {
             <button
               onClick={resetForm}
               aria-label={t('common.close')}
+              className="cursor-pointer"
             >
-              <HiX className="w-5 h-5 text-gray-400 hover:text-gray-600" />
+              <HiX className="w-5 h-5 text-slate-500 hover:text-slate-300 transition-colors" />
             </button>
           </div>
           <form
@@ -188,7 +189,7 @@ export default function TransactionsPage() {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
           >
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-slate-300 mb-1.5">
                 {t('transactions.type')}
               </label>
               <select
@@ -204,7 +205,7 @@ export default function TransactionsPage() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-slate-300 mb-1.5">
                 {t('transactions.category')}
               </label>
               <select
@@ -222,7 +223,7 @@ export default function TransactionsPage() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-slate-300 mb-1.5">
                 {t('transactions.amount')}
               </label>
               <input
@@ -236,7 +237,7 @@ export default function TransactionsPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-slate-300 mb-1.5">
                 {t('transactions.description')}
               </label>
               <input
@@ -247,7 +248,7 @@ export default function TransactionsPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-slate-300 mb-1.5">
                 {t('transactions.date')}
               </label>
               <input
@@ -277,20 +278,20 @@ export default function TransactionsPage() {
       <div className="card overflow-x-auto">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-gray-100">
-              <th className="text-left py-3 px-2 text-sm font-medium text-gray-500">
+            <tr className="border-b border-slate-800">
+              <th className="text-left py-3 px-2 text-sm font-medium text-slate-400">
                 {t('transactions.date')}
               </th>
-              <th className="text-left py-3 px-2 text-sm font-medium text-gray-500">
+              <th className="text-left py-3 px-2 text-sm font-medium text-slate-400">
                 {t('transactions.category')}
               </th>
-              <th className="text-left py-3 px-2 text-sm font-medium text-gray-500 hidden sm:table-cell">
+              <th className="text-left py-3 px-2 text-sm font-medium text-slate-400 hidden sm:table-cell">
                 {t('transactions.description')}
               </th>
-              <th className="text-right py-3 px-2 text-sm font-medium text-gray-500">
+              <th className="text-right py-3 px-2 text-sm font-medium text-slate-400">
                 {t('transactions.amount')}
               </th>
-              <th className="text-right py-3 px-2 text-sm font-medium text-gray-500">
+              <th className="text-right py-3 px-2 text-sm font-medium text-slate-400">
                 {t('common.actions')}
               </th>
             </tr>
@@ -298,7 +299,7 @@ export default function TransactionsPage() {
           <tbody>
             {isLoading ? (
               <tr>
-                <td colSpan={5} className="text-center py-8 text-gray-400">
+                <td colSpan={5} className="text-center py-8 text-slate-500">
                   {t('common.loading')}
                 </td>
               </tr>
@@ -306,21 +307,21 @@ export default function TransactionsPage() {
               txData.data.map((tx: Transaction) => (
                 <tr
                   key={tx.id}
-                  className="border-b border-gray-50 hover:bg-gray-50"
+                  className="border-b border-slate-800/60 hover:bg-slate-800/40 transition-colors"
                 >
-                  <td className="py-3 px-2 text-sm">
+                  <td className="py-3 px-2 text-sm text-slate-300">
                     {format(new Date(tx.date), 'MMM d, yyyy')}
                   </td>
-                  <td className="py-3 px-2 text-sm">
+                  <td className="py-3 px-2 text-sm text-slate-200">
                     <span className="mr-1">{tx.category?.icon}</span>
                     {tx.category?.name}
                   </td>
-                  <td className="py-3 px-2 text-sm text-gray-500 hidden sm:table-cell">
+                  <td className="py-3 px-2 text-sm text-slate-400 hidden sm:table-cell">
                     {tx.description}
                   </td>
                   <td
                     className={`py-3 px-2 text-sm text-right font-medium ${
-                      tx.type === 'INCOME' ? 'text-green-600' : 'text-red-600'
+                      tx.type === 'INCOME' ? 'text-emerald-400' : 'text-red-400'
                     }`}
                   >
                     {tx.type === 'INCOME' ? '+' : '-'}$
@@ -329,7 +330,7 @@ export default function TransactionsPage() {
                   <td className="py-3 px-2 text-right">
                     <button
                       onClick={() => startEdit(tx)}
-                      className="text-gray-400 hover:text-indigo-600 mr-2"
+                      className="text-slate-500 hover:text-amber-400 mr-2 cursor-pointer transition-colors"
                       aria-label={t('common.edit')}
                     >
                       <HiPencil className="w-4 h-4 inline" />
@@ -339,7 +340,7 @@ export default function TransactionsPage() {
                         if (confirm(t('transactions.deleteConfirm')))
                           deleteMutation.mutate(tx.id);
                       }}
-                      className="text-gray-400 hover:text-red-600"
+                      className="text-slate-500 hover:text-red-400 cursor-pointer transition-colors"
                       aria-label={t('common.delete')}
                     >
                       <HiTrash className="w-4 h-4 inline" />
@@ -349,7 +350,7 @@ export default function TransactionsPage() {
               ))
             ) : (
               <tr>
-                <td colSpan={5} className="text-center py-8 text-gray-400">
+                <td colSpan={5} className="text-center py-8 text-slate-500">
                   {t('common.noData')}
                 </td>
               </tr>
@@ -359,15 +360,16 @@ export default function TransactionsPage() {
 
         {/* Pagination */}
         {txData && txData.meta.totalPages > 1 && (
-          <div className="flex justify-center gap-2 mt-4 pt-4 border-t border-gray-100">
+          <div className="flex justify-center gap-2 mt-4 pt-4 border-t border-slate-800">
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page === 1}
-              className="btn-secondary text-sm"
+              className="btn-secondary text-sm !px-3"
+              aria-label="Previous page"
             >
-              &laquo; {t('common.prev')}
+              <HiChevronLeft className="w-5 h-5" />
             </button>
-            <span className="flex items-center text-sm text-gray-500">
+            <span className="flex items-center text-sm text-slate-400 tabular-nums">
               {page} / {txData.meta.totalPages}
             </span>
             <button
@@ -375,9 +377,10 @@ export default function TransactionsPage() {
                 setPage((p) => Math.min(txData.meta.totalPages, p + 1))
               }
               disabled={page === txData.meta.totalPages}
-              className="btn-secondary text-sm"
+              className="btn-secondary text-sm !px-3"
+              aria-label="Next page"
             >
-              {t('common.next')} &raquo;
+              <HiChevronRight className="w-5 h-5" />
             </button>
           </div>
         )}

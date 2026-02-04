@@ -32,16 +32,16 @@ export default function SettingsPage() {
 
   return (
     <div className="max-w-2xl space-y-6">
-      <h1 className="text-2xl font-bold text-gray-900">
+      <h1 className="text-2xl font-bold text-slate-100">
         {t('settings.title')}
       </h1>
 
       <div className="card space-y-4">
-        <h2 className="text-lg font-semibold">{t('settings.profile')}</h2>
+        <h2 className="text-lg font-semibold text-slate-100">{t('settings.profile')}</h2>
         <div>
           <label
             htmlFor="settings-name"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium text-slate-300 mb-1.5"
           >
             {t('auth.name')}
           </label>
@@ -56,7 +56,7 @@ export default function SettingsPage() {
         <div>
           <label
             htmlFor="settings-email"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium text-slate-300 mb-1.5"
           >
             {t('auth.email')}
           </label>
@@ -64,14 +64,14 @@ export default function SettingsPage() {
             id="settings-email"
             type="email"
             value={user?.email ?? ''}
-            className="input-field bg-gray-50"
+            className="input-field !bg-slate-800/40 text-slate-500"
             disabled
           />
         </div>
       </div>
 
       <div className="card space-y-4">
-        <h2 className="text-lg font-semibold">{t('settings.language')}</h2>
+        <h2 className="text-lg font-semibold text-slate-100">{t('settings.language')}</h2>
         <select
           value={language}
           onChange={(e) => setLanguage(e.target.value)}
@@ -84,7 +84,7 @@ export default function SettingsPage() {
       </div>
 
       <div className="card space-y-4">
-        <h2 className="text-lg font-semibold">{t('settings.currency')}</h2>
+        <h2 className="text-lg font-semibold text-slate-100">{t('settings.currency')}</h2>
         <select
           value={currency}
           onChange={(e) => setCurrency(e.target.value)}

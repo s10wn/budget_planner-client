@@ -62,7 +62,7 @@ export default function ApiKeysPage() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-900">
+        <h1 className="text-2xl font-bold text-slate-100">
           {t('apiKeys.title')}
         </h1>
         <button
@@ -74,24 +74,24 @@ export default function ApiKeysPage() {
       </div>
 
       {/* Info box */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-800">
+      <div className="bg-violet-500/10 border border-violet-500/20 rounded-lg p-4 text-sm text-violet-300">
         <p className="font-medium mb-1">Public API Documentation</p>
-        <p>
+        <p className="text-violet-400">
           Use your API key in the{' '}
-          <code className="bg-blue-100 px-1 rounded">x-api-key</code> header.
+          <code className="bg-violet-500/20 px-1.5 py-0.5 rounded text-violet-300">x-api-key</code> header.
           Rate limit: 100 requests/hour.
         </p>
-        <p className="mt-1">
+        <p className="mt-1 text-violet-400">
           API Base URL:{' '}
-          <code className="bg-blue-100 px-1 rounded">/api/v1/</code>
+          <code className="bg-violet-500/20 px-1.5 py-0.5 rounded text-violet-300">/api/v1/</code>
         </p>
-        <p>
+        <p className="text-violet-400">
           Swagger docs:{' '}
           <a
             href="/api/docs"
             target="_blank"
             rel="noopener noreferrer"
-            className="underline"
+            className="underline text-violet-300 hover:text-violet-200"
           >
             /api/docs
           </a>
@@ -106,7 +106,7 @@ export default function ApiKeysPage() {
           <div className="flex-1 w-full">
             <label
               htmlFor="api-key-name"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-slate-300 mb-1.5"
             >
               {t('apiKeys.name')}
             </label>
@@ -138,30 +138,30 @@ export default function ApiKeysPage() {
           >
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2 mb-1">
-                <span className="font-medium">{k.name}</span>
+                <span className="font-medium text-slate-200">{k.name}</span>
                 <span
                   className={`px-2 py-0.5 rounded text-xs font-medium ${
                     k.isActive
-                      ? 'bg-green-100 text-green-700'
-                      : 'bg-red-100 text-red-700'
+                      ? 'bg-emerald-500/15 text-emerald-400'
+                      : 'bg-red-500/15 text-red-400'
                   }`}
                 >
                   {k.isActive ? t('apiKeys.active') : t('apiKeys.revoked')}
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                <code className="text-xs bg-gray-100 px-2 py-1 rounded font-mono truncate max-w-[300px]">
+                <code className="text-xs bg-slate-800 px-2 py-1 rounded font-mono text-slate-400 truncate max-w-[300px]">
                   {k.key}
                 </code>
                 <button
                   onClick={() => copyKey(k.key)}
-                  className="text-gray-400 hover:text-gray-600"
+                  className="text-slate-500 hover:text-amber-400 cursor-pointer transition-colors"
                   title="Copy to clipboard"
                 >
                   <HiClipboardCopy className="w-4 h-4" />
                 </button>
               </div>
-              <p className="text-xs text-gray-400 mt-1">
+              <p className="text-xs text-slate-500 mt-1">
                 {t('apiKeys.requests')}: {k.requestsCount} |{' '}
                 {t('apiKeys.lastUsed')}:{' '}
                 {k.lastUsed
@@ -192,7 +192,7 @@ export default function ApiKeysPage() {
         ))}
 
         {(!apiKeys || apiKeys.length === 0) && (
-          <div className="card text-center text-gray-400 py-8">
+          <div className="card text-center text-slate-500 py-8">
             {t('common.noData')}
           </div>
         )}
