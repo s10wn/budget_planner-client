@@ -95,21 +95,21 @@ export default function AdminPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-slate-100 flex items-center gap-2">
-        <HiShieldCheck className="w-7 h-7 text-amber-400" />
+      <h1 className="text-xl font-semibold text-[#37352F] flex items-center gap-2">
+        <HiShieldCheck className="w-5 h-5 text-[#6940A5]" />
         {t('admin.title')}
       </h1>
 
       {/* Tabs */}
-      <div className="flex flex-wrap gap-2 border-b border-slate-800 pb-2">
+      <div className="flex flex-wrap gap-1 border-b border-[#E9E9E7] pb-2">
         {TAB_CONFIG.map((tabItem) => (
           <button
             key={tabItem.id}
             onClick={() => setTab(tabItem.id)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all cursor-pointer ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-150 cursor-pointer ${
               tab === tabItem.id
-                ? 'bg-amber-500 text-slate-950'
-                : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                ? 'bg-[#37352F] text-white'
+                : 'text-[#787774] hover:bg-[#F7F6F3] hover:text-[#37352F]'
             }`}
           >
             <tabItem.icon className="w-4 h-4" />
@@ -122,25 +122,25 @@ export default function AdminPage() {
       {tab === 'statistics' && stats && (
         <div className="space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="card text-center">
-              <p className="text-3xl font-bold text-amber-400">
+            <div className="card text-center border-l-4 border-l-[#2EAADC]">
+              <p className="text-2xl font-semibold text-[#37352F]">
                 {stats.usersCount}
               </p>
-              <p className="text-sm text-slate-400">{t('admin.totalUsers')}</p>
+              <p className="text-sm text-[#787774]">{t('admin.totalUsers')}</p>
             </div>
-            <div className="card text-center">
-              <p className="text-3xl font-bold text-emerald-400">
+            <div className="card text-center border-l-4 border-l-[#0F7B6C]">
+              <p className="text-2xl font-semibold text-[#37352F]">
                 {stats.transactionsCount}
               </p>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-[#787774]">
                 {t('admin.totalTransactions')}
               </p>
             </div>
-            <div className="card text-center">
-              <p className="text-3xl font-bold text-violet-400">
+            <div className="card text-center border-l-4 border-l-[#6940A5]">
+              <p className="text-2xl font-semibold text-[#37352F]">
                 {stats.activeApiKeys}
               </p>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-[#787774]">
                 {t('admin.activeApiKeys')}
               </p>
             </div>
@@ -148,15 +148,15 @@ export default function AdminPage() {
 
           {stats.recentUsers?.length > 0 && (
             <div className="card">
-              <h3 className="font-semibold text-slate-100 mb-3">Recent Users</h3>
+              <h3 className="text-sm font-semibold text-[#37352F] mb-3">Recent Users</h3>
               <div className="space-y-2">
                 {stats.recentUsers.map((u) => (
                   <div
                     key={u.id}
-                    className="flex justify-between text-sm py-1 border-b border-slate-800/60"
+                    className="flex justify-between text-sm py-1.5 border-b border-[#E9E9E7] last:border-0"
                   >
-                    <span className="text-slate-300">{u.email}</span>
-                    <span className="text-slate-500">
+                    <span className="text-[#37352F]">{u.email}</span>
+                    <span className="text-[#B4B4B0]">
                       {new Date(u.createdAt).toLocaleDateString()}
                     </span>
                   </div>
@@ -169,61 +169,61 @@ export default function AdminPage() {
 
       {/* Users */}
       {tab === 'users' && (
-        <div className="card overflow-x-auto">
+        <div className="card overflow-x-auto !p-0">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-slate-800">
-                <th className="text-left py-3 px-2 text-sm font-medium text-slate-400">
+              <tr className="border-b border-[#E9E9E7]">
+                <th className="text-left py-3 px-4 text-xs font-medium text-[#787774] uppercase tracking-wider">
                   {t('auth.email')}
                 </th>
-                <th className="text-left py-3 px-2 text-sm font-medium text-slate-400 hidden sm:table-cell">
+                <th className="text-left py-3 px-4 text-xs font-medium text-[#787774] uppercase tracking-wider hidden sm:table-cell">
                   {t('auth.name')}
                 </th>
-                <th className="text-left py-3 px-2 text-sm font-medium text-slate-400">
+                <th className="text-left py-3 px-4 text-xs font-medium text-[#787774] uppercase tracking-wider">
                   Role
                 </th>
-                <th className="text-left py-3 px-2 text-sm font-medium text-slate-400">
+                <th className="text-left py-3 px-4 text-xs font-medium text-[#787774] uppercase tracking-wider">
                   Status
                 </th>
-                <th className="text-right py-3 px-2 text-sm font-medium text-slate-400">
+                <th className="text-right py-3 px-4 text-xs font-medium text-[#787774] uppercase tracking-wider">
                   {t('common.actions')}
                 </th>
               </tr>
             </thead>
             <tbody>
               {usersData?.data?.map((u) => (
-                <tr key={u.id} className="border-b border-slate-800/60">
-                  <td className="py-3 px-2 text-sm text-slate-300">{u.email}</td>
-                  <td className="py-3 px-2 text-sm text-slate-400 hidden sm:table-cell">
+                <tr key={u.id} className="border-b border-[#E9E9E7] last:border-0">
+                  <td className="py-3 px-4 text-sm text-[#37352F]">{u.email}</td>
+                  <td className="py-3 px-4 text-sm text-[#787774] hidden sm:table-cell">
                     {u.name}
                   </td>
-                  <td className="py-3 px-2 text-sm">
+                  <td className="py-3 px-4 text-sm">
                     <span
-                      className={`px-2 py-1 rounded text-xs font-medium ${
+                      className={`px-2 py-0.5 rounded text-xs font-medium ${
                         u.role === 'ADMIN'
-                          ? 'bg-violet-500/15 text-violet-400'
-                          : 'bg-slate-800 text-slate-400'
+                          ? 'bg-[#EAE4F2] text-[#6940A5]'
+                          : 'bg-[#F7F6F3] text-[#787774]'
                       }`}
                     >
                       {u.role}
                     </span>
                   </td>
-                  <td className="py-3 px-2 text-sm">
+                  <td className="py-3 px-4 text-sm">
                     <span
-                      className={`px-2 py-1 rounded text-xs font-medium ${
+                      className={`px-2 py-0.5 rounded text-xs font-medium ${
                         u.isBlocked
-                          ? 'bg-red-500/15 text-red-400'
-                          : 'bg-emerald-500/15 text-emerald-400'
+                          ? 'bg-[#FBE4E4] text-[#E03E3E]'
+                          : 'bg-[#DDEDEA] text-[#0F7B6C]'
                       }`}
                     >
                       {u.isBlocked ? 'Blocked' : 'Active'}
                     </span>
                   </td>
-                  <td className="py-3 px-2 text-right">
+                  <td className="py-3 px-4 text-right">
                     {u.isBlocked ? (
                       <button
                         onClick={() => unblockMutation.mutate(u.id)}
-                        className="text-emerald-500 hover:text-emerald-400 mr-2 cursor-pointer transition-colors"
+                        className="text-[#0F7B6C] hover:text-[#0a6356] mr-2 cursor-pointer transition-colors duration-150"
                         title={t('admin.unblock')}
                       >
                         <HiCheck className="w-4 h-4 inline" />
@@ -231,7 +231,7 @@ export default function AdminPage() {
                     ) : (
                       <button
                         onClick={() => blockMutation.mutate(u.id)}
-                        className="text-amber-500 hover:text-amber-400 mr-2 cursor-pointer transition-colors"
+                        className="text-[#D9730D] hover:text-[#c0650b] mr-2 cursor-pointer transition-colors duration-150"
                         title={t('admin.block')}
                       >
                         <HiBan className="w-4 h-4 inline" />
@@ -242,7 +242,7 @@ export default function AdminPage() {
                         if (confirm(t('common.confirm')))
                           deleteUserMutation.mutate(u.id);
                       }}
-                      className="text-slate-500 hover:text-red-400 cursor-pointer transition-colors"
+                      className="text-[#B4B4B0] hover:text-[#E03E3E] cursor-pointer transition-colors duration-150"
                       title={t('common.delete')}
                     >
                       <HiTrash className="w-4 h-4 inline" />
@@ -260,13 +260,13 @@ export default function AdminPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {defaultCategories?.map((cat) => (
             <div key={cat.id} className="card flex items-center gap-3 !p-4">
-              <span className="text-2xl">{cat.icon}</span>
+              <span className="text-xl">{cat.icon}</span>
               <div>
-                <p className="font-medium text-slate-200">{cat.name}</p>
-                <p className="text-xs text-slate-500">{cat.type}</p>
+                <p className="text-sm font-medium text-[#37352F]">{cat.name}</p>
+                <p className="text-xs text-[#B4B4B0]">{cat.type}</p>
               </div>
               <div
-                className="w-4 h-4 rounded-full ml-auto shrink-0"
+                className="w-3 h-3 rounded-full ml-auto shrink-0"
                 style={{ backgroundColor: cat.color }}
               />
             </div>
@@ -276,38 +276,38 @@ export default function AdminPage() {
 
       {/* Currencies */}
       {tab === 'currencies' && (
-        <div className="card overflow-x-auto">
+        <div className="card overflow-x-auto !p-0">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-slate-800">
-                <th className="text-left py-3 px-2 text-sm font-medium text-slate-400">
+              <tr className="border-b border-[#E9E9E7]">
+                <th className="text-left py-3 px-4 text-xs font-medium text-[#787774] uppercase tracking-wider">
                   Code
                 </th>
-                <th className="text-left py-3 px-2 text-sm font-medium text-slate-400">
+                <th className="text-left py-3 px-4 text-xs font-medium text-[#787774] uppercase tracking-wider">
                   Name
                 </th>
-                <th className="text-left py-3 px-2 text-sm font-medium text-slate-400">
+                <th className="text-left py-3 px-4 text-xs font-medium text-[#787774] uppercase tracking-wider">
                   Symbol
                 </th>
-                <th className="text-left py-3 px-2 text-sm font-medium text-slate-400">
+                <th className="text-left py-3 px-4 text-xs font-medium text-[#787774] uppercase tracking-wider">
                   Status
                 </th>
               </tr>
             </thead>
             <tbody>
               {currencies?.map((c) => (
-                <tr key={c.id} className="border-b border-slate-800/60">
-                  <td className="py-3 px-2 font-mono text-sm font-medium text-slate-200">
+                <tr key={c.id} className="border-b border-[#E9E9E7] last:border-0">
+                  <td className="py-3 px-4 font-mono text-sm font-medium text-[#37352F]">
                     {c.code}
                   </td>
-                  <td className="py-3 px-2 text-sm text-slate-300">{c.name}</td>
-                  <td className="py-3 px-2 text-lg text-slate-300">{c.symbol}</td>
-                  <td className="py-3 px-2 text-sm">
+                  <td className="py-3 px-4 text-sm text-[#787774]">{c.name}</td>
+                  <td className="py-3 px-4 text-lg text-[#37352F]">{c.symbol}</td>
+                  <td className="py-3 px-4 text-sm">
                     <span
-                      className={`px-2 py-1 rounded text-xs ${
+                      className={`px-2 py-0.5 rounded text-xs font-medium ${
                         c.isActive
-                          ? 'bg-emerald-500/15 text-emerald-400'
-                          : 'bg-slate-800 text-slate-500'
+                          ? 'bg-[#DDEDEA] text-[#0F7B6C]'
+                          : 'bg-[#F7F6F3] text-[#B4B4B0]'
                       }`}
                     >
                       {c.isActive ? 'Active' : 'Inactive'}

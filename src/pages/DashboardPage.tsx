@@ -21,8 +21,8 @@ import type { PieLabelRenderProps } from 'recharts';
 import { HiArrowUp, HiArrowDown, HiCash } from 'react-icons/hi';
 
 const COLORS = [
-  '#EF4444', '#F59E0B', '#3B82F6', '#10B981', '#8B5CF6',
-  '#EC4899', '#06B6D4', '#D946EF', '#FB923C', '#64748B',
+  '#E03E3E', '#D9730D', '#0B6E99', '#0F7B6C', '#6940A5',
+  '#AD1A72', '#2EAADC', '#DFAB01', '#64473A', '#787774',
 ];
 
 const MONTHS = [
@@ -32,12 +32,12 @@ const MONTHS = [
 
 const chartTooltipStyle = {
   contentStyle: {
-    backgroundColor: '#1e293b',
-    border: '1px solid #334155',
-    borderRadius: '8px',
-    color: '#f1f5f9',
+    backgroundColor: '#FFFFFF',
+    border: '1px solid #E9E9E7',
+    borderRadius: '6px',
+    color: '#37352F',
   },
-  labelStyle: { color: '#94a3b8' },
+  labelStyle: { color: '#787774' },
 };
 
 export default function DashboardPage() {
@@ -89,54 +89,54 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-slate-100">
+      <h1 className="text-xl font-semibold text-[#37352F]">
         {t('dashboard.title')}
       </h1>
 
       {/* Stat cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="card flex items-center gap-4">
-          <div className="w-12 h-12 bg-violet-500/15 rounded-xl flex items-center justify-center shrink-0">
-            <HiCash className="w-6 h-6 text-violet-400" />
+        <div className="card flex items-center gap-4 border-l-4 border-l-[#6940A5]">
+          <div className="w-10 h-10 bg-[#EAE4F2] rounded-lg flex items-center justify-center shrink-0">
+            <HiCash className="w-5 h-5 text-[#6940A5]" />
           </div>
           <div className="min-w-0">
-            <p className="text-sm text-slate-400">{t('dashboard.balance')}</p>
+            <p className="text-sm text-[#787774]">{t('dashboard.balance')}</p>
             {isBalanceLoading ? (
-              <div className="h-8 w-24 bg-slate-800 rounded animate-pulse" />
+              <div className="h-7 w-24 bg-[#F7F6F3] rounded animate-pulse" />
             ) : (
-              <p className="text-2xl font-bold text-slate-100 truncate">
+              <p className="text-xl font-semibold text-[#37352F] truncate">
                 {formatCurrency(balance?.balance ?? 0)}
               </p>
             )}
           </div>
         </div>
 
-        <div className="card flex items-center gap-4">
-          <div className="w-12 h-12 bg-emerald-500/15 rounded-xl flex items-center justify-center shrink-0">
-            <HiArrowUp className="w-6 h-6 text-emerald-400" />
+        <div className="card flex items-center gap-4 border-l-4 border-l-[#0F7B6C]">
+          <div className="w-10 h-10 bg-[#DDEDEA] rounded-lg flex items-center justify-center shrink-0">
+            <HiArrowUp className="w-5 h-5 text-[#0F7B6C]" />
           </div>
           <div className="min-w-0">
-            <p className="text-sm text-slate-400">{t('dashboard.income')}</p>
+            <p className="text-sm text-[#787774]">{t('dashboard.income')}</p>
             {isMonthlyLoading ? (
-              <div className="h-8 w-24 bg-slate-800 rounded animate-pulse" />
+              <div className="h-7 w-24 bg-[#F7F6F3] rounded animate-pulse" />
             ) : (
-              <p className="text-2xl font-bold text-emerald-400 truncate">
+              <p className="text-xl font-semibold text-[#0F7B6C] truncate">
                 +{formatCurrency(monthlyReport?.totalIncome ?? 0)}
               </p>
             )}
           </div>
         </div>
 
-        <div className="card flex items-center gap-4">
-          <div className="w-12 h-12 bg-red-500/15 rounded-xl flex items-center justify-center shrink-0">
-            <HiArrowDown className="w-6 h-6 text-red-400" />
+        <div className="card flex items-center gap-4 border-l-4 border-l-[#E03E3E]">
+          <div className="w-10 h-10 bg-[#FBE4E4] rounded-lg flex items-center justify-center shrink-0">
+            <HiArrowDown className="w-5 h-5 text-[#E03E3E]" />
           </div>
           <div className="min-w-0">
-            <p className="text-sm text-slate-400">{t('dashboard.expenses')}</p>
+            <p className="text-sm text-[#787774]">{t('dashboard.expenses')}</p>
             {isMonthlyLoading ? (
-              <div className="h-8 w-24 bg-slate-800 rounded animate-pulse" />
+              <div className="h-7 w-24 bg-[#F7F6F3] rounded animate-pulse" />
             ) : (
-              <p className="text-2xl font-bold text-red-400 truncate">
+              <p className="text-xl font-semibold text-[#E03E3E] truncate">
                 -{formatCurrency(monthlyReport?.totalExpense ?? 0)}
               </p>
             )}
@@ -146,27 +146,25 @@ export default function DashboardPage() {
 
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Bar chart */}
         <div className="card">
-          <h2 className="text-lg font-semibold text-slate-100 mb-4">
+          <h2 className="text-base font-semibold text-[#37352F] mb-4">
             {t('reports.incomeVsExpenses')}
           </h2>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={barData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-              <XAxis dataKey="name" stroke="#64748b" />
-              <YAxis stroke="#64748b" />
+              <CartesianGrid strokeDasharray="3 3" stroke="#E9E9E7" />
+              <XAxis dataKey="name" stroke="#787774" fontSize={12} />
+              <YAxis stroke="#787774" fontSize={12} />
               <Tooltip {...chartTooltipStyle} formatter={(value) => formatCurrency(Number(value ?? 0))} />
-              <Legend wrapperStyle={{ color: '#94a3b8' }} />
-              <Bar dataKey="income" fill="#10B981" name={t('dashboard.income')} radius={[4, 4, 0, 0]} />
-              <Bar dataKey="expense" fill="#EF4444" name={t('dashboard.expenses')} radius={[4, 4, 0, 0]} />
+              <Legend wrapperStyle={{ color: '#787774', fontSize: 12 }} />
+              <Bar dataKey="income" fill="#0F7B6C" name={t('dashboard.income')} radius={[3, 3, 0, 0]} />
+              <Bar dataKey="expense" fill="#E03E3E" name={t('dashboard.expenses')} radius={[3, 3, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
 
-        {/* Pie chart */}
         <div className="card">
-          <h2 className="text-lg font-semibold text-slate-100 mb-4">
+          <h2 className="text-base font-semibold text-[#37352F] mb-4">
             {t('reports.expensesByCategory')}
           </h2>
           {pieData.length > 0 ? (
@@ -196,7 +194,7 @@ export default function DashboardPage() {
               </PieChart>
             </ResponsiveContainer>
           ) : (
-            <div className="flex items-center justify-center h-[300px] text-slate-500">
+            <div className="flex items-center justify-center h-[300px] text-[#B4B4B0]">
               {t('common.noData')}
             </div>
           )}
@@ -205,45 +203,44 @@ export default function DashboardPage() {
 
       {/* Recent transactions + Budget status */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Recent transactions */}
         <div className="card">
-          <h2 className="text-lg font-semibold text-slate-100 mb-4">
+          <h2 className="text-base font-semibold text-[#37352F] mb-4">
             {t('dashboard.recentTransactions')}
           </h2>
-          <div className="space-y-3">
+          <div className="space-y-1">
             {isRecentLoading ? (
               Array.from({ length: 3 }).map((_, i) => (
-                <div key={i} className="flex items-center justify-between py-2">
+                <div key={i} className="flex items-center justify-between py-2.5">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-slate-800 rounded animate-pulse" />
+                    <div className="w-8 h-8 bg-[#F7F6F3] rounded animate-pulse" />
                     <div className="space-y-1">
-                      <div className="h-4 w-24 bg-slate-800 rounded animate-pulse" />
-                      <div className="h-3 w-16 bg-slate-800 rounded animate-pulse" />
+                      <div className="h-4 w-24 bg-[#F7F6F3] rounded animate-pulse" />
+                      <div className="h-3 w-16 bg-[#F7F6F3] rounded animate-pulse" />
                     </div>
                   </div>
-                  <div className="h-4 w-16 bg-slate-800 rounded animate-pulse" />
+                  <div className="h-4 w-16 bg-[#F7F6F3] rounded animate-pulse" />
                 </div>
               ))
             ) : recent?.length ? (
               recent.map((tx) => (
                 <div
                   key={tx.id}
-                  className="flex items-center justify-between py-2 border-b border-slate-800/60 last:border-0"
+                  className="flex items-center justify-between py-2.5 border-b border-[#E9E9E7] last:border-0"
                 >
                   <div className="flex items-center gap-3 min-w-0">
-                    <span className="text-2xl shrink-0">{tx.category?.icon}</span>
+                    <span className="text-xl shrink-0">{tx.category?.icon}</span>
                     <div className="min-w-0">
-                      <p className="font-medium text-slate-200 truncate">
+                      <p className="text-sm font-medium text-[#37352F] truncate">
                         {tx.category?.name}
                       </p>
-                      <p className="text-sm text-slate-500 truncate">
+                      <p className="text-xs text-[#B4B4B0] truncate">
                         {tx.description || format(new Date(tx.date), 'MMM d, yyyy')}
                       </p>
                     </div>
                   </div>
                   <span
-                    className={`font-semibold shrink-0 ml-2 ${
-                      tx.type === 'INCOME' ? 'text-emerald-400' : 'text-red-400'
+                    className={`text-sm font-medium shrink-0 ml-2 ${
+                      tx.type === 'INCOME' ? 'text-[#0F7B6C]' : 'text-[#E03E3E]'
                     }`}
                   >
                     {tx.type === 'INCOME' ? '+' : '-'}
@@ -252,36 +249,35 @@ export default function DashboardPage() {
                 </div>
               ))
             ) : (
-              <p className="text-slate-500 text-center py-4">
+              <p className="text-[#B4B4B0] text-center py-4 text-sm">
                 {t('common.noData')}
               </p>
             )}
           </div>
         </div>
 
-        {/* Budget status */}
         <div className="card">
-          <h2 className="text-lg font-semibold text-slate-100 mb-4">
+          <h2 className="text-base font-semibold text-[#37352F] mb-4">
             {t('dashboard.budgetOverview')}
           </h2>
           <div className="space-y-4">
             {budgetStatus?.length ? (
               budgetStatus.map((b) => (
                 <div key={b.id}>
-                  <div className="flex justify-between items-center mb-1">
-                    <span className="text-sm font-medium text-slate-300 truncate">
+                  <div className="flex justify-between items-center mb-1.5">
+                    <span className="text-sm font-medium text-[#37352F] truncate">
                       {b.category?.icon} {b.category?.name}
                     </span>
                     <span
-                      className={`text-sm font-medium shrink-0 ml-2 ${
-                        b.isOverBudget ? 'text-red-400' : 'text-slate-400'
+                      className={`text-xs font-medium shrink-0 ml-2 ${
+                        b.isOverBudget ? 'text-[#E03E3E]' : 'text-[#787774]'
                       }`}
                     >
                       {formatCurrency(b.spentAmount)} / {formatCurrency(b.budgetAmount)}
                     </span>
                   </div>
                   <div
-                    className="w-full bg-slate-800 rounded-full h-2.5"
+                    className="w-full bg-[#E9E9E7] rounded-full h-2"
                     role="progressbar"
                     aria-valuenow={Math.min(b.percentage, 100)}
                     aria-valuemin={0}
@@ -289,25 +285,25 @@ export default function DashboardPage() {
                     aria-label={`${b.category?.name} budget progress`}
                   >
                     <div
-                      className={`h-2.5 rounded-full transition-all ${
+                      className={`h-2 rounded-full transition-all ${
                         b.isOverBudget
-                          ? 'bg-red-500'
+                          ? 'bg-[#E03E3E]'
                           : b.percentage > 80
-                            ? 'bg-amber-500'
-                            : 'bg-emerald-500'
+                            ? 'bg-[#D9730D]'
+                            : 'bg-[#0F7B6C]'
                       }`}
                       style={{ width: `${Math.min(b.percentage, 100)}%` }}
                     />
                   </div>
                   {b.isOverBudget && (
-                    <p className="text-xs text-red-400 mt-1">
+                    <p className="text-xs text-[#E03E3E] mt-1">
                       {t('budgets.overBudget')}
                     </p>
                   )}
                 </div>
               ))
             ) : (
-              <p className="text-slate-500 text-center py-4">
+              <p className="text-[#B4B4B0] text-center py-4 text-sm">
                 {t('common.noData')}
               </p>
             )}

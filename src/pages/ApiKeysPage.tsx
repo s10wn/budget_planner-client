@@ -62,36 +62,36 @@ export default function ApiKeysPage() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-slate-100">
+        <h1 className="text-xl font-semibold text-[#37352F]">
           {t('apiKeys.title')}
         </h1>
         <button
           onClick={() => setShowForm(!showForm)}
           className="btn-primary flex items-center gap-2"
         >
-          <HiPlus className="w-5 h-5" /> {t('apiKeys.create')}
+          <HiPlus className="w-4 h-4" /> {t('apiKeys.create')}
         </button>
       </div>
 
       {/* Info box */}
-      <div className="bg-violet-500/10 border border-violet-500/20 rounded-lg p-4 text-sm text-violet-300">
+      <div className="bg-[#DDEBF1] border border-[#0B6E99]/20 rounded-lg p-4 text-sm text-[#0B6E99]">
         <p className="font-medium mb-1">Public API Documentation</p>
-        <p className="text-violet-400">
+        <p className="text-[#0B6E99]/80">
           Use your API key in the{' '}
-          <code className="bg-violet-500/20 px-1.5 py-0.5 rounded text-violet-300">x-api-key</code> header.
+          <code className="bg-[#0B6E99]/10 px-1.5 py-0.5 rounded text-[#0B6E99]">x-api-key</code> header.
           Rate limit: 100 requests/hour.
         </p>
-        <p className="mt-1 text-violet-400">
+        <p className="mt-1 text-[#0B6E99]/80">
           API Base URL:{' '}
-          <code className="bg-violet-500/20 px-1.5 py-0.5 rounded text-violet-300">/api/v1/</code>
+          <code className="bg-[#0B6E99]/10 px-1.5 py-0.5 rounded text-[#0B6E99]">/api/v1/</code>
         </p>
-        <p className="text-violet-400">
+        <p className="text-[#0B6E99]/80">
           Swagger docs:{' '}
           <a
             href="/api/docs"
             target="_blank"
             rel="noopener noreferrer"
-            className="underline text-violet-300 hover:text-violet-200"
+            className="underline hover:no-underline"
           >
             /api/docs
           </a>
@@ -106,7 +106,7 @@ export default function ApiKeysPage() {
           <div className="flex-1 w-full">
             <label
               htmlFor="api-key-name"
-              className="block text-sm font-medium text-slate-300 mb-1.5"
+              className="block text-sm font-medium text-[#37352F] mb-1.5"
             >
               {t('apiKeys.name')}
             </label>
@@ -138,30 +138,30 @@ export default function ApiKeysPage() {
           >
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2 mb-1">
-                <span className="font-medium text-slate-200">{k.name}</span>
+                <span className="text-sm font-medium text-[#37352F]">{k.name}</span>
                 <span
                   className={`px-2 py-0.5 rounded text-xs font-medium ${
                     k.isActive
-                      ? 'bg-emerald-500/15 text-emerald-400'
-                      : 'bg-red-500/15 text-red-400'
+                      ? 'bg-[#DDEDEA] text-[#0F7B6C]'
+                      : 'bg-[#FBE4E4] text-[#E03E3E]'
                   }`}
                 >
                   {k.isActive ? t('apiKeys.active') : t('apiKeys.revoked')}
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                <code className="text-xs bg-slate-800 px-2 py-1 rounded font-mono text-slate-400 truncate max-w-[300px]">
+                <code className="text-xs bg-[#F7F6F3] px-2 py-1 rounded font-mono text-[#787774] truncate max-w-[300px]">
                   {k.key}
                 </code>
                 <button
                   onClick={() => copyKey(k.key)}
-                  className="text-slate-500 hover:text-amber-400 cursor-pointer transition-colors"
+                  className="text-[#B4B4B0] hover:text-[#2EAADC] cursor-pointer transition-colors duration-150"
                   title="Copy to clipboard"
                 >
                   <HiClipboardCopy className="w-4 h-4" />
                 </button>
               </div>
-              <p className="text-xs text-slate-500 mt-1">
+              <p className="text-xs text-[#B4B4B0] mt-1">
                 {t('apiKeys.requests')}: {k.requestsCount} |{' '}
                 {t('apiKeys.lastUsed')}:{' '}
                 {k.lastUsed
@@ -192,7 +192,7 @@ export default function ApiKeysPage() {
         ))}
 
         {(!apiKeys || apiKeys.length === 0) && (
-          <div className="card text-center text-slate-500 py-8">
+          <div className="card text-center text-[#B4B4B0] py-8 text-sm">
             {t('common.noData')}
           </div>
         )}

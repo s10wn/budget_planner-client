@@ -16,7 +16,6 @@ export default function TransactionsPage() {
   const [showForm, setShowForm] = useState(false);
   const [editingTx, setEditingTx] = useState<Transaction | null>(null);
 
-  // Form state
   const [formType, setFormType] = useState<'INCOME' | 'EXPENSE'>('EXPENSE');
   const [formCategoryId, setFormCategoryId] = useState('');
   const [formAmount, setFormAmount] = useState('');
@@ -129,7 +128,7 @@ export default function TransactionsPage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <h1 className="text-2xl font-bold text-slate-100">
+        <h1 className="text-xl font-semibold text-[#37352F]">
           {t('transactions.title')}
         </h1>
         <button
@@ -139,7 +138,7 @@ export default function TransactionsPage() {
           }}
           className="btn-primary flex items-center gap-2"
         >
-          <HiPlus className="w-5 h-5" /> {t('transactions.addNew')}
+          <HiPlus className="w-4 h-4" /> {t('transactions.addNew')}
         </button>
       </div>
 
@@ -152,10 +151,10 @@ export default function TransactionsPage() {
               setTypeFilter(type);
               setPage(1);
             }}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all cursor-pointer ${
+            className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-150 cursor-pointer ${
               typeFilter === type
-                ? 'bg-amber-500 text-slate-950'
-                : 'bg-slate-800 text-slate-400 border border-slate-700 hover:bg-slate-700 hover:text-slate-200'
+                ? 'bg-[#37352F] text-white'
+                : 'text-[#787774] hover:bg-[#F7F6F3] hover:text-[#37352F]'
             }`}
           >
             {type === ''
@@ -167,11 +166,11 @@ export default function TransactionsPage() {
         ))}
       </div>
 
-      {/* Form modal */}
+      {/* Form */}
       {showForm && (
         <div className="card">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-semibold text-slate-100">
+            <h2 className="text-base font-semibold text-[#37352F]">
               {editingTx
                 ? t('transactions.editTransaction')
                 : t('transactions.addNew')}
@@ -181,7 +180,7 @@ export default function TransactionsPage() {
               aria-label={t('common.close')}
               className="cursor-pointer"
             >
-              <HiX className="w-5 h-5 text-slate-500 hover:text-slate-300 transition-colors" />
+              <HiX className="w-4 h-4 text-[#B4B4B0] hover:text-[#37352F] transition-colors" />
             </button>
           </div>
           <form
@@ -189,7 +188,7 @@ export default function TransactionsPage() {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
           >
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1.5">
+              <label className="block text-sm font-medium text-[#37352F] mb-1.5">
                 {t('transactions.type')}
               </label>
               <select
@@ -205,7 +204,7 @@ export default function TransactionsPage() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1.5">
+              <label className="block text-sm font-medium text-[#37352F] mb-1.5">
                 {t('transactions.category')}
               </label>
               <select
@@ -223,7 +222,7 @@ export default function TransactionsPage() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1.5">
+              <label className="block text-sm font-medium text-[#37352F] mb-1.5">
                 {t('transactions.amount')}
               </label>
               <input
@@ -237,7 +236,7 @@ export default function TransactionsPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1.5">
+              <label className="block text-sm font-medium text-[#37352F] mb-1.5">
                 {t('transactions.description')}
               </label>
               <input
@@ -248,7 +247,7 @@ export default function TransactionsPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1.5">
+              <label className="block text-sm font-medium text-[#37352F] mb-1.5">
                 {t('transactions.date')}
               </label>
               <input
@@ -274,24 +273,24 @@ export default function TransactionsPage() {
         </div>
       )}
 
-      {/* Transactions list */}
-      <div className="card overflow-x-auto">
+      {/* Transactions table */}
+      <div className="card overflow-x-auto !p-0">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-slate-800">
-              <th className="text-left py-3 px-2 text-sm font-medium text-slate-400">
+            <tr className="border-b border-[#E9E9E7]">
+              <th className="text-left py-3 px-4 text-xs font-medium text-[#787774] uppercase tracking-wider">
                 {t('transactions.date')}
               </th>
-              <th className="text-left py-3 px-2 text-sm font-medium text-slate-400">
+              <th className="text-left py-3 px-4 text-xs font-medium text-[#787774] uppercase tracking-wider">
                 {t('transactions.category')}
               </th>
-              <th className="text-left py-3 px-2 text-sm font-medium text-slate-400 hidden sm:table-cell">
+              <th className="text-left py-3 px-4 text-xs font-medium text-[#787774] uppercase tracking-wider hidden sm:table-cell">
                 {t('transactions.description')}
               </th>
-              <th className="text-right py-3 px-2 text-sm font-medium text-slate-400">
+              <th className="text-right py-3 px-4 text-xs font-medium text-[#787774] uppercase tracking-wider">
                 {t('transactions.amount')}
               </th>
-              <th className="text-right py-3 px-2 text-sm font-medium text-slate-400">
+              <th className="text-right py-3 px-4 text-xs font-medium text-[#787774] uppercase tracking-wider">
                 {t('common.actions')}
               </th>
             </tr>
@@ -299,7 +298,7 @@ export default function TransactionsPage() {
           <tbody>
             {isLoading ? (
               <tr>
-                <td colSpan={5} className="text-center py-8 text-slate-500">
+                <td colSpan={5} className="text-center py-8 text-[#B4B4B0] text-sm">
                   {t('common.loading')}
                 </td>
               </tr>
@@ -307,30 +306,30 @@ export default function TransactionsPage() {
               txData.data.map((tx: Transaction) => (
                 <tr
                   key={tx.id}
-                  className="border-b border-slate-800/60 hover:bg-slate-800/40 transition-colors"
+                  className="border-b border-[#E9E9E7] last:border-0 hover:bg-[#F7F6F3] transition-colors duration-100"
                 >
-                  <td className="py-3 px-2 text-sm text-slate-300">
+                  <td className="py-3 px-4 text-sm text-[#787774]">
                     {format(new Date(tx.date), 'MMM d, yyyy')}
                   </td>
-                  <td className="py-3 px-2 text-sm text-slate-200">
+                  <td className="py-3 px-4 text-sm text-[#37352F]">
                     <span className="mr-1">{tx.category?.icon}</span>
                     {tx.category?.name}
                   </td>
-                  <td className="py-3 px-2 text-sm text-slate-400 hidden sm:table-cell">
+                  <td className="py-3 px-4 text-sm text-[#787774] hidden sm:table-cell">
                     {tx.description}
                   </td>
                   <td
-                    className={`py-3 px-2 text-sm text-right font-medium ${
-                      tx.type === 'INCOME' ? 'text-emerald-400' : 'text-red-400'
+                    className={`py-3 px-4 text-sm text-right font-medium ${
+                      tx.type === 'INCOME' ? 'text-[#0F7B6C]' : 'text-[#E03E3E]'
                     }`}
                   >
                     {tx.type === 'INCOME' ? '+' : '-'}$
                     {Number(tx.amount).toFixed(2)}
                   </td>
-                  <td className="py-3 px-2 text-right">
+                  <td className="py-3 px-4 text-right">
                     <button
                       onClick={() => startEdit(tx)}
-                      className="text-slate-500 hover:text-amber-400 mr-2 cursor-pointer transition-colors"
+                      className="text-[#B4B4B0] hover:text-[#37352F] mr-2 cursor-pointer transition-colors duration-150"
                       aria-label={t('common.edit')}
                     >
                       <HiPencil className="w-4 h-4 inline" />
@@ -340,7 +339,7 @@ export default function TransactionsPage() {
                         if (confirm(t('transactions.deleteConfirm')))
                           deleteMutation.mutate(tx.id);
                       }}
-                      className="text-slate-500 hover:text-red-400 cursor-pointer transition-colors"
+                      className="text-[#B4B4B0] hover:text-[#E03E3E] cursor-pointer transition-colors duration-150"
                       aria-label={t('common.delete')}
                     >
                       <HiTrash className="w-4 h-4 inline" />
@@ -350,7 +349,7 @@ export default function TransactionsPage() {
               ))
             ) : (
               <tr>
-                <td colSpan={5} className="text-center py-8 text-slate-500">
+                <td colSpan={5} className="text-center py-8 text-[#B4B4B0] text-sm">
                   {t('common.noData')}
                 </td>
               </tr>
@@ -360,16 +359,16 @@ export default function TransactionsPage() {
 
         {/* Pagination */}
         {txData && txData.meta.totalPages > 1 && (
-          <div className="flex justify-center gap-2 mt-4 pt-4 border-t border-slate-800">
+          <div className="flex justify-center gap-2 py-4 border-t border-[#E9E9E7]">
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page === 1}
               className="btn-secondary text-sm !px-3"
               aria-label="Previous page"
             >
-              <HiChevronLeft className="w-5 h-5" />
+              <HiChevronLeft className="w-4 h-4" />
             </button>
-            <span className="flex items-center text-sm text-slate-400 tabular-nums">
+            <span className="flex items-center text-sm text-[#787774] tabular-nums">
               {page} / {txData.meta.totalPages}
             </span>
             <button
@@ -380,7 +379,7 @@ export default function TransactionsPage() {
               className="btn-secondary text-sm !px-3"
               aria-label="Next page"
             >
-              <HiChevronRight className="w-5 h-5" />
+              <HiChevronRight className="w-4 h-4" />
             </button>
           </div>
         )}

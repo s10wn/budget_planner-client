@@ -12,8 +12,8 @@ const EMOJI_OPTIONS = [
 ];
 
 const COLOR_OPTIONS = [
-  '#EF4444', '#F59E0B', '#10B981', '#3B82F6', '#8B5CF6',
-  '#EC4899', '#06B6D4', '#D946EF', '#FB923C', '#64748B',
+  '#E03E3E', '#D9730D', '#DFAB01', '#0F7B6C', '#0B6E99',
+  '#6940A5', '#AD1A72', '#2EAADC', '#64473A', '#787774',
 ];
 
 export default function CategoriesPage() {
@@ -24,7 +24,7 @@ export default function CategoriesPage() {
   const [name, setName] = useState('');
   const [type, setType] = useState<'INCOME' | 'EXPENSE'>('EXPENSE');
   const [icon, setIcon] = useState('📦');
-  const [color, setColor] = useState('#6B7280');
+  const [color, setColor] = useState('#787774');
 
   const { data: categories } = useQuery({
     queryKey: ['categories'],
@@ -68,7 +68,7 @@ export default function CategoriesPage() {
     setName('');
     setType('EXPENSE');
     setIcon('📦');
-    setColor('#6B7280');
+    setColor('#787774');
   };
 
   const startEdit = (cat: Category) => {
@@ -97,10 +97,10 @@ export default function CategoriesPage() {
   const renderCategoryCard = (cat: Category) => (
     <div key={cat.id} className="card flex items-center justify-between !p-4">
       <div className="flex items-center gap-3 min-w-0">
-        <span className="text-2xl shrink-0">{cat.icon}</span>
+        <span className="text-xl shrink-0">{cat.icon}</span>
         <div className="min-w-0">
-          <p className="font-medium text-slate-200 truncate">{cat.name}</p>
-          <p className="text-xs text-slate-500">
+          <p className="text-sm font-medium text-[#37352F] truncate">{cat.name}</p>
+          <p className="text-xs text-[#B4B4B0]">
             {cat.isDefault ? t('categories.default') : t('categories.personal')}
           </p>
         </div>
@@ -113,7 +113,7 @@ export default function CategoriesPage() {
         <div className="flex gap-1 shrink-0 ml-2">
           <button
             onClick={() => startEdit(cat)}
-            className="text-slate-500 hover:text-amber-400 cursor-pointer transition-colors"
+            className="text-[#B4B4B0] hover:text-[#37352F] cursor-pointer transition-colors duration-150"
             aria-label={t('common.edit')}
           >
             <HiPencil className="w-4 h-4" />
@@ -122,7 +122,7 @@ export default function CategoriesPage() {
             onClick={() => {
               if (confirm(t('common.confirm'))) deleteMutation.mutate(cat.id);
             }}
-            className="text-slate-500 hover:text-red-400 cursor-pointer transition-colors"
+            className="text-[#B4B4B0] hover:text-[#E03E3E] cursor-pointer transition-colors duration-150"
             aria-label={t('common.delete')}
           >
             <HiTrash className="w-4 h-4" />
@@ -135,7 +135,7 @@ export default function CategoriesPage() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-slate-100">
+        <h1 className="text-xl font-semibold text-[#37352F]">
           {t('categories.title')}
         </h1>
         <button
@@ -145,15 +145,15 @@ export default function CategoriesPage() {
           }}
           className="btn-primary flex items-center gap-2"
         >
-          <HiPlus className="w-5 h-5" /> {t('categories.addNew')}
+          <HiPlus className="w-4 h-4" /> {t('categories.addNew')}
         </button>
       </div>
 
-      {/* Add/Edit form */}
+      {/* Form */}
       {showForm && (
         <div className="card">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-semibold text-slate-100">
+            <h2 className="text-base font-semibold text-[#37352F]">
               {editing ? t('common.edit') : t('categories.addNew')}
             </h2>
             <button
@@ -161,13 +161,13 @@ export default function CategoriesPage() {
               aria-label={t('common.close')}
               className="cursor-pointer"
             >
-              <HiX className="w-5 h-5 text-slate-500 hover:text-slate-300 transition-colors" />
+              <HiX className="w-4 h-4 text-[#B4B4B0] hover:text-[#37352F] transition-colors" />
             </button>
           </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">
+                <label className="block text-sm font-medium text-[#37352F] mb-1.5">
                   {t('categories.name')}
                 </label>
                 <input
@@ -179,7 +179,7 @@ export default function CategoriesPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">
+                <label className="block text-sm font-medium text-[#37352F] mb-1.5">
                   {t('categories.type')}
                 </label>
                 <select
@@ -196,7 +196,7 @@ export default function CategoriesPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1.5">
+              <label className="block text-sm font-medium text-[#37352F] mb-1.5">
                 {t('categories.icon')}
               </label>
               <div className="flex flex-wrap gap-2">
@@ -205,10 +205,10 @@ export default function CategoriesPage() {
                     type="button"
                     key={emoji}
                     onClick={() => setIcon(emoji)}
-                    className={`w-10 h-10 text-xl rounded-lg flex items-center justify-center transition-all cursor-pointer ${
+                    className={`w-9 h-9 text-lg rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer ${
                       icon === emoji
-                        ? 'ring-2 ring-amber-500 bg-amber-500/15'
-                        : 'bg-slate-800 hover:bg-slate-700'
+                        ? 'ring-2 ring-[#2EAADC] bg-[#DDEBF1]'
+                        : 'bg-[#F7F6F3] hover:bg-[#E9E9E7]'
                     }`}
                   >
                     {emoji}
@@ -218,7 +218,7 @@ export default function CategoriesPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1.5">
+              <label className="block text-sm font-medium text-[#37352F] mb-1.5">
                 {t('categories.color')}
               </label>
               <div className="flex flex-wrap gap-2">
@@ -227,8 +227,8 @@ export default function CategoriesPage() {
                     type="button"
                     key={c}
                     onClick={() => setColor(c)}
-                    className={`w-8 h-8 rounded-full transition-shadow cursor-pointer ${
-                      color === c ? 'ring-2 ring-offset-2 ring-offset-slate-900 ring-amber-500' : ''
+                    className={`w-7 h-7 rounded-full transition-shadow duration-150 cursor-pointer ${
+                      color === c ? 'ring-2 ring-offset-2 ring-offset-white ring-[#2EAADC]' : ''
                     }`}
                     style={{ backgroundColor: c }}
                     aria-label={c}
@@ -250,32 +250,32 @@ export default function CategoriesPage() {
         </div>
       )}
 
-      {/* Income categories */}
+      {/* Income */}
       <section>
-        <h2 className="text-lg font-semibold text-emerald-400 mb-3">
+        <h2 className="text-sm font-semibold text-[#0F7B6C] uppercase tracking-wider mb-3">
           {t('transactions.income')}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {incomeCategories.length > 0 ? (
             incomeCategories.map(renderCategoryCard)
           ) : (
-            <p className="text-slate-500 col-span-full text-center py-4">
+            <p className="text-[#B4B4B0] col-span-full text-center py-4 text-sm">
               {t('common.noData')}
             </p>
           )}
         </div>
       </section>
 
-      {/* Expense categories */}
+      {/* Expense */}
       <section>
-        <h2 className="text-lg font-semibold text-red-400 mb-3">
+        <h2 className="text-sm font-semibold text-[#E03E3E] uppercase tracking-wider mb-3">
           {t('transactions.expense')}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {expenseCategories.length > 0 ? (
             expenseCategories.map(renderCategoryCard)
           ) : (
-            <p className="text-slate-500 col-span-full text-center py-4">
+            <p className="text-[#B4B4B0] col-span-full text-center py-4 text-sm">
               {t('common.noData')}
             </p>
           )}

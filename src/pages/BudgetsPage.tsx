@@ -71,14 +71,14 @@ export default function BudgetsPage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <h1 className="text-2xl font-bold text-slate-100">
+        <h1 className="text-xl font-semibold text-[#37352F]">
           {t('budgets.title')}
         </h1>
         <button
           onClick={() => setShowForm(!showForm)}
           className="btn-primary flex items-center gap-2"
         >
-          <HiPlus className="w-5 h-5" /> {t('budgets.addNew')}
+          <HiPlus className="w-4 h-4" /> {t('budgets.addNew')}
         </button>
       </div>
 
@@ -115,7 +115,7 @@ export default function BudgetsPage() {
           className="card flex flex-col sm:flex-row gap-4 items-end"
         >
           <div className="flex-1 w-full">
-            <label className="block text-sm font-medium text-slate-300 mb-1.5">
+            <label className="block text-sm font-medium text-[#37352F] mb-1.5">
               {t('transactions.category')}
             </label>
             <select
@@ -133,7 +133,7 @@ export default function BudgetsPage() {
             </select>
           </div>
           <div className="flex-1 w-full">
-            <label className="block text-sm font-medium text-slate-300 mb-1.5">
+            <label className="block text-sm font-medium text-[#37352F] mb-1.5">
               {t('budgets.amount')}
             </label>
             <input
@@ -173,12 +173,12 @@ export default function BudgetsPage() {
             <div key={b.id} className="card">
               <div className="flex justify-between items-start mb-3">
                 <div className="flex items-center gap-2 min-w-0">
-                  <span className="text-2xl shrink-0">{b.category?.icon}</span>
+                  <span className="text-xl shrink-0">{b.category?.icon}</span>
                   <div className="min-w-0">
-                    <p className="font-semibold text-slate-100 truncate">
+                    <p className="text-sm font-semibold text-[#37352F] truncate">
                       {b.category?.name}
                     </p>
-                    <p className="text-sm text-slate-400">
+                    <p className="text-xs text-[#787774]">
                       {formatCurrency(b.spentAmount)} /{' '}
                       {formatCurrency(b.budgetAmount)}
                     </p>
@@ -189,14 +189,14 @@ export default function BudgetsPage() {
                     if (confirm(t('common.confirm')))
                       deleteMutation.mutate(b.id);
                   }}
-                  className="text-slate-500 hover:text-red-400 shrink-0 ml-2 cursor-pointer transition-colors"
+                  className="text-[#B4B4B0] hover:text-[#E03E3E] shrink-0 ml-2 cursor-pointer transition-colors duration-150"
                   aria-label={t('common.delete')}
                 >
                   <HiTrash className="w-4 h-4" />
                 </button>
               </div>
               <div
-                className="w-full bg-slate-800 rounded-full h-3 mb-2"
+                className="w-full bg-[#E9E9E7] rounded-full h-2.5 mb-2"
                 role="progressbar"
                 aria-valuenow={Math.min(b.percentage, 100)}
                 aria-valuemin={0}
@@ -204,23 +204,23 @@ export default function BudgetsPage() {
                 aria-label={`${b.category?.name} budget progress`}
               >
                 <div
-                  className={`h-3 rounded-full transition-all ${
+                  className={`h-2.5 rounded-full transition-all ${
                     b.isOverBudget
-                      ? 'bg-red-500'
+                      ? 'bg-[#E03E3E]'
                       : b.percentage > 80
-                        ? 'bg-amber-500'
-                        : 'bg-emerald-500'
+                        ? 'bg-[#D9730D]'
+                        : 'bg-[#0F7B6C]'
                   }`}
                   style={{ width: `${Math.min(b.percentage, 100)}%` }}
                 />
               </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-slate-400">{b.percentage}%</span>
+              <div className="flex justify-between text-xs">
+                <span className="text-[#787774]">{b.percentage}%</span>
                 <span
                   className={
                     b.isOverBudget
-                      ? 'text-red-400 font-medium'
-                      : 'text-emerald-400'
+                      ? 'text-[#E03E3E] font-medium'
+                      : 'text-[#0F7B6C]'
                   }
                 >
                   {b.isOverBudget
@@ -231,7 +231,7 @@ export default function BudgetsPage() {
             </div>
           ))
         ) : (
-          <div className="col-span-2 card text-center text-slate-500 py-8">
+          <div className="col-span-2 card text-center text-[#B4B4B0] py-8 text-sm">
             {t('common.noData')}
           </div>
         )}

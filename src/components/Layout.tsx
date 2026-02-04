@@ -47,18 +47,18 @@ export default function Layout() {
   }
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
-    `flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all ${
+    `flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-all duration-150 ${
       isActive
-        ? 'bg-amber-500/15 text-amber-400 font-medium'
-        : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'
+        ? 'bg-[#F7F6F3] text-[#37352F] font-semibold'
+        : 'text-[#787774] hover:bg-[#F7F6F3] hover:text-[#37352F]'
     }`;
 
   return (
-    <div className="min-h-screen flex bg-slate-950">
+    <div className="min-h-screen flex bg-white">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+          className="fixed inset-0 bg-black/20 z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
           aria-hidden="true"
         />
@@ -66,23 +66,23 @@ export default function Layout() {
 
       {/* Sidebar */}
       <aside
-        className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-slate-900 border-r border-slate-800 flex flex-col transition-transform lg:translate-x-0 ${
+        className={`fixed lg:static inset-y-0 left-0 z-50 w-60 bg-[#FBFBFA] border-r border-[#E9E9E7] flex flex-col transition-transform lg:translate-x-0 ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
         aria-label="Sidebar navigation"
       >
-        <div className="flex items-center justify-between px-6 h-16 border-b border-slate-800">
-          <h1 className="text-xl font-bold text-amber-400 tracking-tight">BudgetPlanner</h1>
+        <div className="flex items-center justify-between px-4 h-14 border-b border-[#E9E9E7]">
+          <h1 className="text-sm font-semibold text-[#37352F] tracking-tight">Budget Planner</h1>
           <button
-            className="lg:hidden text-slate-400 hover:text-slate-200 cursor-pointer"
+            className="lg:hidden text-[#787774] hover:text-[#37352F] cursor-pointer"
             onClick={() => setSidebarOpen(false)}
             aria-label="Close sidebar"
           >
-            <HiX className="w-6 h-6" />
+            <HiX className="w-5 h-5" />
           </button>
         </div>
 
-        <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+        <nav className="flex-1 px-2 py-3 space-y-0.5 overflow-y-auto">
           {navItems.map((item) => (
             <NavLink
               key={item.to}
@@ -91,18 +91,18 @@ export default function Layout() {
               className={linkClass}
               onClick={() => setSidebarOpen(false)}
             >
-              <item.icon className="w-5 h-5" />
+              <item.icon className="w-[18px] h-[18px]" />
               {item.label}
             </NavLink>
           ))}
         </nav>
 
-        <div className="border-t border-slate-800 p-4 space-y-1">
+        <div className="border-t border-[#E9E9E7] p-2 space-y-0.5">
           <button
             onClick={toggleLanguage}
-            className="flex items-center gap-3 w-full px-4 py-2.5 text-slate-400 hover:bg-slate-800/60 hover:text-slate-200 rounded-lg transition-all cursor-pointer"
+            className="flex items-center gap-3 w-full px-3 py-2 text-sm text-[#787774] hover:bg-[#F7F6F3] hover:text-[#37352F] rounded-md transition-all duration-150 cursor-pointer"
           >
-            <HiGlobe className="w-5 h-5" />
+            <HiGlobe className="w-[18px] h-[18px]" />
             {i18n.language === 'en' ? 'Polski' : 'English'}
           </button>
           <NavLink
@@ -110,14 +110,14 @@ export default function Layout() {
             className={linkClass}
             onClick={() => setSidebarOpen(false)}
           >
-            <HiCog className="w-5 h-5" />
+            <HiCog className="w-[18px] h-[18px]" />
             {t('nav.settings')}
           </NavLink>
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 w-full px-4 py-2.5 text-red-400 hover:bg-red-500/10 hover:text-red-300 rounded-lg transition-all cursor-pointer"
+            className="flex items-center gap-3 w-full px-3 py-2 text-sm text-[#E03E3E] hover:bg-[#FBE4E4] rounded-md transition-all duration-150 cursor-pointer"
           >
-            <HiLogout className="w-5 h-5" />
+            <HiLogout className="w-[18px] h-[18px]" />
             {t('auth.logout')}
           </button>
         </div>
@@ -126,18 +126,18 @@ export default function Layout() {
       {/* Main content */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top bar */}
-        <header className="bg-slate-900/80 backdrop-blur-sm border-b border-slate-800 h-16 flex items-center justify-between px-4 lg:px-8 sticky top-0 z-30">
+        <header className="bg-white border-b border-[#E9E9E7] h-14 flex items-center justify-between px-4 lg:px-8 sticky top-0 z-30">
           <button
-            className="lg:hidden text-slate-400 hover:text-slate-200 cursor-pointer"
+            className="lg:hidden text-[#787774] hover:text-[#37352F] cursor-pointer"
             onClick={() => setSidebarOpen(true)}
             aria-label="Open sidebar"
           >
-            <HiMenu className="w-6 h-6" />
+            <HiMenu className="w-5 h-5" />
           </button>
           <div className="flex items-center gap-3 ml-auto">
-            <span className="text-sm text-slate-400">{user?.email}</span>
+            <span className="text-sm text-[#787774]">{user?.email}</span>
             <div
-              className="w-8 h-8 bg-amber-500/20 text-amber-400 rounded-full flex items-center justify-center font-semibold text-sm"
+              className="w-8 h-8 bg-[#2EAADC] text-white rounded-full flex items-center justify-center font-medium text-sm"
               aria-hidden="true"
             >
               {user?.name?.charAt(0)?.toUpperCase() || user?.email?.charAt(0)?.toUpperCase()}
@@ -146,7 +146,7 @@ export default function Layout() {
         </header>
 
         {/* Page content */}
-        <main className="flex-1 p-4 lg:p-8 overflow-auto">
+        <main className="flex-1 p-4 lg:p-8 overflow-auto bg-white">
           <Outlet />
         </main>
       </div>

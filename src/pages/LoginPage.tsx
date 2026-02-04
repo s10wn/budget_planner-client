@@ -27,15 +27,15 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-950 px-4">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center bg-[#F7F6F3] px-4">
+      <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-amber-400 tracking-tight">BudgetPlanner</h1>
-          <p className="text-slate-400 mt-2">{t('auth.loginTitle')}</p>
+          <h1 className="text-2xl font-semibold text-[#37352F] tracking-tight">Budget Planner</h1>
+          <p className="text-[#787774] mt-2 text-sm">{t('auth.loginTitle')}</p>
         </div>
         <form onSubmit={handleSubmit} className="card space-y-5">
           <div>
-            <label htmlFor="login-email" className="block text-sm font-medium text-slate-300 mb-1.5">
+            <label htmlFor="login-email" className="block text-sm font-medium text-[#37352F] mb-1.5">
               {t('auth.email')}
             </label>
             <input
@@ -50,7 +50,7 @@ export default function LoginPage() {
             />
           </div>
           <div>
-            <label htmlFor="login-password" className="block text-sm font-medium text-slate-300 mb-1.5">
+            <label htmlFor="login-password" className="block text-sm font-medium text-[#37352F] mb-1.5">
               {t('auth.password')}
             </label>
             <input
@@ -67,9 +67,9 @@ export default function LoginPage() {
           <button type="submit" disabled={loading} className="btn-primary w-full">
             {loading ? t('common.loading') : t('auth.login')}
           </button>
-          <p className="text-center text-sm text-slate-400">
+          <p className="text-center text-sm text-[#787774]">
             {t('auth.noAccount')}{' '}
-            <Link to="/register" className="text-amber-400 hover:text-amber-300 transition-colors">
+            <Link to="/register" className="text-[#2EAADC] hover:underline transition-colors">
               {t('auth.register')}
             </Link>
           </p>

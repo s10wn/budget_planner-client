@@ -26,18 +26,18 @@ const MONTHS = [
 ];
 
 const COLORS = [
-  '#EF4444', '#F59E0B', '#3B82F6', '#10B981', '#8B5CF6',
-  '#EC4899', '#06B6D4', '#D946EF', '#FB923C', '#64748B',
+  '#E03E3E', '#D9730D', '#0B6E99', '#0F7B6C', '#6940A5',
+  '#AD1A72', '#2EAADC', '#DFAB01', '#64473A', '#787774',
 ];
 
 const chartTooltipStyle = {
   contentStyle: {
-    backgroundColor: '#1e293b',
-    border: '1px solid #334155',
-    borderRadius: '8px',
-    color: '#f1f5f9',
+    backgroundColor: '#FFFFFF',
+    border: '1px solid #E9E9E7',
+    borderRadius: '6px',
+    color: '#37352F',
   },
-  labelStyle: { color: '#94a3b8' },
+  labelStyle: { color: '#787774' },
 };
 
 export default function ReportsPage() {
@@ -61,12 +61,12 @@ export default function ReportsPage() {
         {
           name: t('dashboard.income'),
           value: monthlyReport.totalIncome,
-          fill: '#10B981',
+          fill: '#0F7B6C',
         },
         {
           name: t('dashboard.expenses'),
           value: monthlyReport.totalExpense,
-          fill: '#EF4444',
+          fill: '#E03E3E',
         },
       ]
     : [];
@@ -123,7 +123,7 @@ export default function ReportsPage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <h1 className="text-2xl font-bold text-slate-100">
+        <h1 className="text-xl font-semibold text-[#37352F]">
           {t('reports.title')}
         </h1>
         <div className="flex gap-2">
@@ -173,22 +173,22 @@ export default function ReportsPage() {
       {/* Summary cards */}
       {monthlyReport && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="card text-center">
-            <p className="text-sm text-slate-400">{t('dashboard.income')}</p>
-            <p className="text-2xl font-bold text-emerald-400">
+          <div className="card text-center border-l-4 border-l-[#0F7B6C]">
+            <p className="text-sm text-[#787774]">{t('dashboard.income')}</p>
+            <p className="text-xl font-semibold text-[#0F7B6C]">
               +{formatCurrency(monthlyReport.totalIncome)}
             </p>
           </div>
-          <div className="card text-center">
-            <p className="text-sm text-slate-400">{t('dashboard.expenses')}</p>
-            <p className="text-2xl font-bold text-red-400">
+          <div className="card text-center border-l-4 border-l-[#E03E3E]">
+            <p className="text-sm text-[#787774]">{t('dashboard.expenses')}</p>
+            <p className="text-xl font-semibold text-[#E03E3E]">
               -{formatCurrency(monthlyReport.totalExpense)}
             </p>
           </div>
-          <div className="card text-center">
-            <p className="text-sm text-slate-400">{t('dashboard.balance')}</p>
+          <div className="card text-center border-l-4 border-l-[#6940A5]">
+            <p className="text-sm text-[#787774]">{t('dashboard.balance')}</p>
             <p
-              className={`text-2xl font-bold ${monthlyReport.balance >= 0 ? 'text-violet-400' : 'text-red-400'}`}
+              className={`text-xl font-semibold ${monthlyReport.balance >= 0 ? 'text-[#6940A5]' : 'text-[#E03E3E]'}`}
             >
               {formatCurrency(monthlyReport.balance)}
             </p>
@@ -198,21 +198,20 @@ export default function ReportsPage() {
 
       {/* Charts grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Monthly income vs expenses */}
         <div className="card">
-          <h2 className="text-lg font-semibold text-slate-100 mb-4">
+          <h2 className="text-base font-semibold text-[#37352F] mb-4">
             {t('reports.incomeVsExpenses')}
           </h2>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={barData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-              <XAxis dataKey="name" stroke="#64748b" />
-              <YAxis stroke="#64748b" />
+              <CartesianGrid strokeDasharray="3 3" stroke="#E9E9E7" />
+              <XAxis dataKey="name" stroke="#787774" fontSize={12} />
+              <YAxis stroke="#787774" fontSize={12} />
               <Tooltip
                 {...chartTooltipStyle}
                 formatter={(value) => formatCurrency(Number(value ?? 0))}
               />
-              <Bar dataKey="value" radius={[4, 4, 0, 0]}>
+              <Bar dataKey="value" radius={[3, 3, 0, 0]}>
                 {barData.map((entry, index) => (
                   <Cell key={index} fill={entry.fill} />
                 ))}
@@ -221,9 +220,8 @@ export default function ReportsPage() {
           </ResponsiveContainer>
         </div>
 
-        {/* Expenses by category pie */}
         <div className="card">
-          <h2 className="text-lg font-semibold text-slate-100 mb-4">
+          <h2 className="text-base font-semibold text-[#37352F] mb-4">
             {t('reports.expensesByCategory')}
           </h2>
           {pieData.length > 0 ? (
@@ -253,7 +251,7 @@ export default function ReportsPage() {
               </PieChart>
             </ResponsiveContainer>
           ) : (
-            <div className="flex items-center justify-center h-[300px] text-slate-500">
+            <div className="flex items-center justify-center h-[300px] text-[#B4B4B0] text-sm">
               {t('common.noData')}
             </div>
           )}
@@ -262,30 +260,30 @@ export default function ReportsPage() {
 
       {/* Yearly trend */}
       <div className="card">
-        <h2 className="text-lg font-semibold text-slate-100 mb-4">
+        <h2 className="text-base font-semibold text-[#37352F] mb-4">
           {t('reports.yearlyTrend')} ({year})
         </h2>
         <ResponsiveContainer width="100%" height={350}>
           <LineChart data={lineData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-            <XAxis dataKey="name" stroke="#64748b" />
-            <YAxis stroke="#64748b" />
+            <CartesianGrid strokeDasharray="3 3" stroke="#E9E9E7" />
+            <XAxis dataKey="name" stroke="#787774" fontSize={12} />
+            <YAxis stroke="#787774" fontSize={12} />
             <Tooltip
               {...chartTooltipStyle}
               formatter={(value) => formatCurrency(Number(value ?? 0))}
             />
-            <Legend wrapperStyle={{ color: '#94a3b8' }} />
+            <Legend wrapperStyle={{ color: '#787774', fontSize: 12 }} />
             <Line
               type="monotone"
               dataKey="income"
-              stroke="#10B981"
+              stroke="#0F7B6C"
               strokeWidth={2}
               name={t('dashboard.income')}
             />
             <Line
               type="monotone"
               dataKey="expense"
-              stroke="#EF4444"
+              stroke="#E03E3E"
               strokeWidth={2}
               name={t('dashboard.expenses')}
             />
