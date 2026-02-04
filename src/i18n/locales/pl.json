@@ -1,0 +1,127 @@
+{
+  "common": {
+    "save": "Zapisz",
+    "cancel": "Anuluj",
+    "delete": "Usuń",
+    "edit": "Edytuj",
+    "add": "Dodaj",
+    "search": "Szukaj",
+    "loading": "Ładowanie...",
+    "noData": "Brak danych",
+    "confirm": "Czy jesteś pewien?",
+    "yes": "Tak",
+    "no": "Nie",
+    "back": "Wstecz",
+    "actions": "Akcje",
+    "total": "Razem",
+    "export": "Eksport"
+  },
+  "auth": {
+    "login": "Zaloguj się",
+    "register": "Rejestracja",
+    "email": "Email",
+    "password": "Hasło",
+    "name": "Imię",
+    "logout": "Wyloguj się",
+    "loginTitle": "Zaloguj się na swoje konto",
+    "registerTitle": "Utwórz swoje konto",
+    "noAccount": "Nie masz konta?",
+    "hasAccount": "Masz już konto?",
+    "loginError": "Nieprawidłowy email lub hasło",
+    "registerError": "Błąd rejestracji"
+  },
+  "nav": {
+    "dashboard": "Panel główny",
+    "transactions": "Transakcje",
+    "categories": "Kategorie",
+    "budgets": "Budżety",
+    "reports": "Raporty",
+    "apiKeys": "Klucze API",
+    "settings": "Ustawienia",
+    "admin": "Panel admina"
+  },
+  "dashboard": {
+    "title": "Panel główny",
+    "balance": "Saldo",
+    "income": "Przychody",
+    "expenses": "Wydatki",
+    "recentTransactions": "Ostatnie transakcje",
+    "budgetOverview": "Przegląd budżetu",
+    "monthlyOverview": "Przegląd miesięczny"
+  },
+  "transactions": {
+    "title": "Transakcje",
+    "addNew": "Dodaj transakcję",
+    "editTransaction": "Edytuj transakcję",
+    "amount": "Kwota",
+    "category": "Kategoria",
+    "type": "Typ",
+    "date": "Data",
+    "description": "Opis",
+    "currency": "Waluta",
+    "income": "Przychód",
+    "expense": "Wydatek",
+    "all": "Wszystkie",
+    "deleteConfirm": "Usunąć tę transakcję?"
+  },
+  "categories": {
+    "title": "Kategorie",
+    "addNew": "Dodaj kategorię",
+    "name": "Nazwa",
+    "type": "Typ",
+    "icon": "Ikona",
+    "color": "Kolor",
+    "default": "Domyślne",
+    "personal": "Osobiste"
+  },
+  "budgets": {
+    "title": "Budżety",
+    "addNew": "Ustaw budżet",
+    "amount": "Kwota budżetu",
+    "spent": "Wydano",
+    "remaining": "Pozostało",
+    "overBudget": "Przekroczono budżet!",
+    "month": "Miesiąc",
+    "year": "Rok"
+  },
+  "reports": {
+    "title": "Raporty",
+    "monthly": "Raport miesięczny",
+    "yearlyTrend": "Trend roczny",
+    "incomeVsExpenses": "Przychody i wydatki",
+    "expensesByCategory": "Wydatki wg kategorii",
+    "incomeByCategory": "Przychody wg kategorii",
+    "exportPdf": "Eksport PDF",
+    "exportCsv": "Eksport CSV"
+  },
+  "admin": {
+    "title": "Panel admina",
+    "users": "Użytkownicy",
+    "categories": "Kategorie domyślne",
+    "currencies": "Waluty",
+    "settings": "Ustawienia systemowe",
+    "statistics": "Statystyki",
+    "block": "Zablokuj",
+    "unblock": "Odblokuj",
+    "totalUsers": "Łączna liczba użytkowników",
+    "totalTransactions": "Łączna liczba transakcji",
+    "activeApiKeys": "Aktywne klucze API"
+  },
+  "apiKeys": {
+    "title": "Klucze API",
+    "create": "Utwórz klucz API",
+    "name": "Nazwa klucza",
+    "key": "Klucz API",
+    "requests": "Żądania",
+    "lastUsed": "Ostatnie użycie",
+    "revoke": "Unieważnij",
+    "active": "Aktywny",
+    "revoked": "Unieważniony"
+  },
+  "settings": {
+    "title": "Ustawienia",
+    "language": "Język",
+    "currency": "Domyślna waluta",
+    "profile": "Profil"
+  }
+}
