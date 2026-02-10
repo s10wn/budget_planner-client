@@ -1,0 +1,127 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "loading": "Loading...",
+    "noData": "No data available",
+    "confirm": "Are you sure?",
+    "yes": "Yes",
+    "no": "No",
+    "back": "Back",
+    "actions": "Actions",
+    "total": "Total",
+    "export": "Export"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "logout": "Logout",
+    "loginTitle": "Sign in to your account",
+    "registerTitle": "Create your account",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "loginError": "Invalid email or password",
+    "registerError": "Registration failed"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "transactions": "Transactions",
+    "categories": "Categories",
+    "budgets": "Budgets",
+    "reports": "Reports",
+    "apiKeys": "API Keys",
+    "settings": "Settings",
+    "admin": "Admin Panel"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "balance": "Balance",
+    "income": "Income",
+    "expenses": "Expenses",
+    "recentTransactions": "Recent Transactions",
+    "budgetOverview": "Budget Overview",
+    "monthlyOverview": "Monthly Overview"
+  },
+  "transactions": {
+    "title": "Transactions",
+    "addNew": "Add Transaction",
+    "editTransaction": "Edit Transaction",
+    "amount": "Amount",
+    "category": "Category",
+    "type": "Type",
+    "date": "Date",
+    "description": "Description",
+    "currency": "Currency",
+    "income": "Income",
+    "expense": "Expense",
+    "all": "All",
+    "deleteConfirm": "Delete this transaction?"
+  },
+  "categories": {
+    "title": "Categories",
+    "addNew": "Add Category",
+    "name": "Name",
+    "type": "Type",
+    "icon": "Icon",
+    "color": "Color",
+    "default": "Default",
+    "personal": "Personal"
+  },
+  "budgets": {
+    "title": "Budgets",
+    "addNew": "Set Budget",
+    "amount": "Budget Amount",
+    "spent": "Spent",
+    "remaining": "Remaining",
+    "overBudget": "Over Budget!",
+    "month": "Month",
+    "year": "Year"
+  },
+  "reports": {
+    "title": "Reports",
+    "monthly": "Monthly Report",
+    "yearlyTrend": "Yearly Trend",
+    "incomeVsExpenses": "Income vs Expenses",
+    "expensesByCategory": "Expenses by Category",
+    "incomeByCategory": "Income by Category",
+    "exportPdf": "Export PDF",
+    "exportCsv": "Export CSV"
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "users": "Users",
+    "categories": "Default Categories",
+    "currencies": "Currencies",
+    "settings": "System Settings",
+    "statistics": "Statistics",
+    "block": "Block",
+    "unblock": "Unblock",
+    "totalUsers": "Total Users",
+    "totalTransactions": "Total Transactions",
+    "activeApiKeys": "Active API Keys"
+  },
+  "apiKeys": {
+    "title": "API Keys",
+    "create": "Create API Key",
+    "name": "Key Name",
+    "key": "API Key",
+    "requests": "Requests",
+    "lastUsed": "Last Used",
+    "revoke": "Revoke",
+    "active": "Active",
+    "revoked": "Revoked"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "currency": "Default Currency",
+    "profile": "Profile"
+  }
+}

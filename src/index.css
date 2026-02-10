@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    @apply bg-white text-[#37352F] antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-[#2EAADC] text-white px-4 py-2 rounded-md hover:bg-[#2696c4] transition-all duration-150 font-medium disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer;
+  }
+  .btn-secondary {
+    @apply bg-white text-[#37352F] px-4 py-2 rounded-md hover:bg-[#F7F6F3] transition-all duration-150 font-medium border border-[#E9E9E7] cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+  .btn-danger {
+    @apply bg-[#FBE4E4] text-[#E03E3E] px-4 py-2 rounded-md hover:bg-[#f5d0d0] transition-all duration-150 font-medium cursor-pointer;
+  }
+  .input-field {
+    @apply w-full px-3 py-2.5 bg-white border border-[#E9E9E7] rounded-md text-[#37352F] placeholder:text-[#B4B4B0] focus:outline-none focus:ring-2 focus:ring-[#2EAADC]/20 focus:border-[#2EAADC] transition-all duration-150;
+  }
+  .card {
+    @apply bg-white rounded-lg border border-[#E9E9E7] p-6 shadow-[0_1px_3px_rgba(0,0,0,0.04)];
+  }
+}
