@@ -13,6 +13,8 @@ import {
   HiTrash,
   HiBan,
   HiCheck,
+  HiPlus,
+  HiX,
 } from 'react-icons/hi';
 
 type Tab = 'statistics' | 'users' | 'categories' | 'currencies';
@@ -40,10 +42,34 @@ const TAB_CONFIG: { id: Tab; icon: typeof HiChartBar; labelKey: string }[] = [
   { id: 'currencies', icon: HiCurrencyDollar, labelKey: 'admin.currencies' },
 ];
 
+const EMOJI_OPTIONS = [
+  '📦', '💰', '💻', '📈', '💵', '🛒', '🚗', '🏠', '💡', '🎬',
+  '🏥', '📚', '🛍️', '🍽️', '📱', '✈️', '🎮', '🎵', '🐾', '🏋️',
+];
+
+const COLOR_OPTIONS = [
+  '#E03E3E', '#D9730D', '#DFAB01', '#0F7B6C', '#0B6E99',
+  '#6940A5', '#AD1A72', '#2EAADC', '#64473A', '#787774',
+];
+
 export default function AdminPage() {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
   const [tab, setTab] = useState<Tab>('statistics');
+
+  // User form state
+  const [showUserForm, setShowUserForm] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
+  const [userPassword, setUserPassword] = useState('');
+  const [userName, setUserName] = useState('');
+  const [userRole, setUserRole] = useState<'USER' | 'ADMIN'>('USER');
+
+  // Category form state
+  const [showCategoryForm, setShowCategoryForm] = useState(false);
+  const [catName, setCatName] = useState('');
+  const [catType, setCatType] = useState<'INCOME' | 'EXPENSE'>('EXPENSE');
+  const [catIcon, setCatIcon] = useState('📦');
+  const [catColor, setCatColor] = useState('#787774');
 
   const { data: stats } = useQuery<AdminStats>({
     queryKey: ['admin-stats'],
@@ -92,6 +118,55 @@ export default function AdminPage() {
       toast.success(t('common.delete'));
     },
   });
+
+  const createUserMutation = useMutation({
+    mutationFn: (data: { email: string; password: string; name?: string; role?: 'USER' | 'ADMIN' }) =>
+      adminService.createUser(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-users'] });
+      queryClient.invalidateQueries({ queryKey: ['admin-stats'] });
+      setShowUserForm(false);
+      setUserEmail('');
+      setUserPassword('');
+      setUserName('');
+      setUserRole('USER');
+      toast.success(t('common.save'));
+    },
+    onError: () => toast.error('User with this email already exists'),
+  });
+
+  const createCategoryMutation = useMutation({
+    mutationFn: (data: { name: string; type: 'INCOME' | 'EXPENSE'; icon: string; color: string }) =>
+      adminService.createCategory(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-categories'] });
+      setShowCategoryForm(false);
+      setCatName('');
+      setCatType('EXPENSE');
+      setCatIcon('📦');
+      setCatColor('#787774');
+      toast.success(t('common.save'));
+    },
+    onError: () => toast.error('Error creating category'),
+  });
+
+  const deleteCategoryMutation = useMutation({
+    mutationFn: (id: string) => adminService.deleteCategory(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-categories'] });
+      toast.success(t('common.delete'));
+    },
+  });
+
+  const handleCreateUser = (e: React.FormEvent) => {
+    e.preventDefault();
+    createUserMutation.mutate({ email: userEmail, password: userPassword, name: userName, role: userRole });
+  };
+
+  const handleCreateCategory = (e: React.FormEvent) => {
+    e.preventDefault();
+    createCategoryMutation.mutate({ name: catName, type: catType, icon: catIcon, color: catColor });
+  };
 
   return (
     <div className="space-y-6">
@@ -169,7 +244,74 @@ export default function AdminPage() {
 
       {/* Users */}
       {tab === 'users' && (
-        <div className="card overflow-x-auto !p-0">
+        <div className="space-y-4">
+          <div className="flex justify-end">
+            <button
+              onClick={() => setShowUserForm(!showUserForm)}
+              className="btn-primary flex items-center gap-2"
+            >
+              <HiPlus className="w-4 h-4" /> {t('admin.createUser')}
+            </button>
+          </div>
+
+          {showUserForm && (
+            <form onSubmit={handleCreateUser} className="card space-y-4">
+              <div className="flex justify-between items-center">
+                <h3 className="text-base font-semibold text-[#37352F]">{t('admin.createUser')}</h3>
+                <button type="button" onClick={() => setShowUserForm(false)} className="cursor-pointer">
+                  <HiX className="w-4 h-4 text-[#B4B4B0] hover:text-[#37352F]" />
+                </button>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-[#37352F] mb-1.5">{t('auth.email')}</label>
+                  <input
+                    type="email"
+                    value={userEmail}
+                    onChange={(e) => setUserEmail(e.target.value)}
+                    className="input-field"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-[#37352F] mb-1.5">{t('auth.password')}</label>
+                  <input
+                    type="password"
+                    value={userPassword}
+                    onChange={(e) => setUserPassword(e.target.value)}
+                    className="input-field"
+                    required
+                    minLength={6}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-[#37352F] mb-1.5">{t('auth.name')}</label>
+                  <input
+                    type="text"
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
+                    className="input-field"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-[#37352F] mb-1.5">Role</label>
+                  <select
+                    value={userRole}
+                    onChange={(e) => setUserRole(e.target.value as 'USER' | 'ADMIN')}
+                    className="input-field"
+                  >
+                    <option value="USER">User</option>
+                    <option value="ADMIN">Admin</option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" className="btn-primary" disabled={createUserMutation.isPending}>
+                {createUserMutation.isPending ? t('common.loading') : t('common.save')}
+              </button>
+            </form>
+          )}
+
+          <div className="card overflow-x-auto !p-0">
           <table className="w-full">
             <thead>
               <tr className="border-b border-[#E9E9E7]">
@@ -252,25 +394,117 @@ export default function AdminPage() {
               ))}
             </tbody>
           </table>
+          </div>
         </div>
       )}
 
       {/* Default categories */}
       {tab === 'categories' && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {defaultCategories?.map((cat) => (
-            <div key={cat.id} className="card flex items-center gap-3 !p-4">
-              <span className="text-xl">{cat.icon}</span>
-              <div>
-                <p className="text-sm font-medium text-[#37352F]">{cat.name}</p>
-                <p className="text-xs text-[#B4B4B0]">{cat.type}</p>
+        <div className="space-y-4">
+          <div className="flex justify-end">
+            <button
+              onClick={() => setShowCategoryForm(!showCategoryForm)}
+              className="btn-primary flex items-center gap-2"
+            >
+              <HiPlus className="w-4 h-4" /> {t('categories.addNew')}
+            </button>
+          </div>
+
+          {showCategoryForm && (
+            <form onSubmit={handleCreateCategory} className="card space-y-4">
+              <div className="flex justify-between items-center">
+                <h3 className="text-base font-semibold text-[#37352F]">{t('categories.addNew')}</h3>
+                <button type="button" onClick={() => setShowCategoryForm(false)} className="cursor-pointer">
+                  <HiX className="w-4 h-4 text-[#B4B4B0] hover:text-[#37352F]" />
+                </button>
               </div>
-              <div
-                className="w-3 h-3 rounded-full ml-auto shrink-0"
-                style={{ backgroundColor: cat.color }}
-              />
-            </div>
-          ))}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-[#37352F] mb-1.5">{t('categories.name')}</label>
+                  <input
+                    type="text"
+                    value={catName}
+                    onChange={(e) => setCatName(e.target.value)}
+                    className="input-field"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-[#37352F] mb-1.5">{t('categories.type')}</label>
+                  <select
+                    value={catType}
+                    onChange={(e) => setCatType(e.target.value as 'INCOME' | 'EXPENSE')}
+                    className="input-field"
+                  >
+                    <option value="EXPENSE">{t('transactions.expense')}</option>
+                    <option value="INCOME">{t('transactions.income')}</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-[#37352F] mb-1.5">{t('categories.icon')}</label>
+                <div className="flex flex-wrap gap-2">
+                  {EMOJI_OPTIONS.map((emoji) => (
+                    <button
+                      type="button"
+                      key={emoji}
+                      onClick={() => setCatIcon(emoji)}
+                      className={`w-9 h-9 text-lg rounded-md flex items-center justify-center transition-all duration-150 cursor-pointer ${
+                        catIcon === emoji
+                          ? 'ring-2 ring-[#2EAADC] bg-[#DDEBF1]'
+                          : 'bg-[#F7F6F3] hover:bg-[#E9E9E7]'
+                      }`}
+                    >
+                      {emoji}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-[#37352F] mb-1.5">{t('categories.color')}</label>
+                <div className="flex flex-wrap gap-2">
+                  {COLOR_OPTIONS.map((c) => (
+                    <button
+                      type="button"
+                      key={c}
+                      onClick={() => setCatColor(c)}
+                      className={`w-7 h-7 rounded-full transition-shadow duration-150 cursor-pointer ${
+                        catColor === c ? 'ring-2 ring-offset-2 ring-offset-white ring-[#2EAADC]' : ''
+                      }`}
+                      style={{ backgroundColor: c }}
+                    />
+                  ))}
+                </div>
+              </div>
+              <button type="submit" className="btn-primary" disabled={createCategoryMutation.isPending}>
+                {createCategoryMutation.isPending ? t('common.loading') : t('common.save')}
+              </button>
+            </form>
+          )}
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {defaultCategories?.map((cat) => (
+              <div key={cat.id} className="card flex items-center gap-3 !p-4">
+                <span className="text-xl">{cat.icon}</span>
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-medium text-[#37352F]">{cat.name}</p>
+                  <p className="text-xs text-[#B4B4B0]">{cat.type}</p>
+                </div>
+                <div
+                  className="w-3 h-3 rounded-full shrink-0"
+                  style={{ backgroundColor: cat.color }}
+                />
+                <button
+                  onClick={() => {
+                    if (confirm(t('common.confirm'))) deleteCategoryMutation.mutate(cat.id);
+                  }}
+                  className="text-[#B4B4B0] hover:text-[#E03E3E] cursor-pointer transition-colors duration-150 shrink-0"
+                >
+                  <HiTrash className="w-4 h-4" />
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 

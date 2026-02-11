@@ -20,6 +20,11 @@ export const adminService = {
     await api.delete(`/admin/users/${id}`);
   },
 
+  async createUser(userData: { email: string; password: string; name?: string; role?: 'USER' | 'ADMIN' }) {
+    const { data } = await api.post('/admin/users', userData);
+    return data;
+  },
+
   async getDefaultCategories() {
     const { data } = await api.get('/admin/categories');
     return data;
@@ -32,6 +37,11 @@ export const adminService = {
 
   async deleteCategory(id: string) {
     await api.delete(`/admin/categories/${id}`);
+  },
+
+  async createCategory(categoryData: { name: string; type: 'INCOME' | 'EXPENSE'; icon: string; color: string }) {
+    const { data } = await api.post('/admin/categories', categoryData);
+    return data;
   },
 
   async getCurrencies() {

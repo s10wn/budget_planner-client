@@ -105,7 +105,8 @@
     "unblock": "Unblock",
     "totalUsers": "Total Users",
     "totalTransactions": "Total Transactions",
-    "activeApiKeys": "Active API Keys"
+    "activeApiKeys": "Active API Keys",
+    "createUser": "Create User"
   },
   "apiKeys": {
     "title": "API Keys",
